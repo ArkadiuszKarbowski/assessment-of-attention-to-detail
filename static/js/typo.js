@@ -37,3 +37,4 @@ for (let i = 0; i < leftWords.length; i++) {
     leftColumn.appendChild(span);
   }
 }
+
