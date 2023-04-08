@@ -59,5 +59,5 @@ function stopTimer() {
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
   alert(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  window.location.href = "/page5";
+  window.location.href = "/page6";
 }

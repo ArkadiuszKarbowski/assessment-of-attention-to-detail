@@ -24,10 +24,12 @@ def create_app():
 
   @app.route("/")
   def index():
-    return render_template('test.html')
-
-  @app.route('/page2', methods=['GET', 'POST'])
+    return render_template('home.html')
+  @app.route("/page2")
   def page2():
+    return render_template('test.html')
+  @app.route('/page3', methods=['GET', 'POST'])
+  def page3():
     try:
       if request.method == 'POST':
         first_name = request.form['imie']
@@ -50,18 +52,18 @@ def create_app():
     except Exception as e:
       db.session.rollback()
       print(str(e))
-    return redirect('/page3')
+    return redirect('/page4')
   
-  @app.route('/page3')
-  def page3():
-    return render_template('spot-typo.html')
   @app.route('/page4')
   def page4():
-    return render_template('zad2.html')
+    return render_template('spot-typo.html')
   @app.route('/page5')
   def page5():
+    return render_template('zad2.html')
+  @app.route('/page6')
+  def page6():
     return render_template('zad3.html')
   if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host= '0.0.0.0', debug=True)
 
   return app
