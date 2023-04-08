@@ -25,7 +25,7 @@ def create_app():
 
     @app.route("/")
     def index():
-      return render_template('index.html')
+        return render_template('index.html')
 
     @app.route("/dodaj")
     def dodaj():
@@ -35,7 +35,7 @@ def create_app():
       except Exception as e:
         db.session.rollback()
         print(str(e))
-      return render_template('test.html')
+      return render_template('index.html')
 
     if __name__ == "__main__":
      app.run(debug=True)
