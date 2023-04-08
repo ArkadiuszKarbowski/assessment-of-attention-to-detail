@@ -9,7 +9,7 @@ def create_app():
   app = Flask(__name__)
 
   from models.users import Users
-
+  from models.task_results import TestResult
   
 
   #coś zmienne srodowiskowe mi nie działają więc
@@ -60,8 +60,25 @@ def create_app():
   @app.route('/page5')
   def page5():
     return render_template('zad2.html')
-  @app.route('/page6')
+  @app.route('/page6', methods=['POST'])
   def page6():
+    try:
+        # Get the data from the form
+        selected_answer = request.form['sel']
+        correct_answer = request.form['correct']
+        task_version = request.form['ver']
+        time_taken = request.form['timetak']
+
+        # Create a new TestResult object and add it to the database
+        new_result = TestResult(user_id=1, task_id=1, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
+        db.session.add(new_result)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page7')
+  @app.route('/page7')
+  def page7():
     return render_template('zad3.html')
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
