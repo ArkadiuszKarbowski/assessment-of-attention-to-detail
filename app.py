@@ -60,14 +60,14 @@ def create_app():
   @app.route('/page5')
   def page5():
     return render_template('zad2.html')
-  @app.route('/page6', methods=['POST'])
+  @app.route('/page6', methods=['GET', 'POST'])
   def page6():
     try:
-        # Get the data from the form
-        selected_answer = request.form['sel']
-        correct_answer = request.form['correct']
-        task_version = request.form['ver']
-        time_taken = request.form['timetak']
+        if request.method == 'POST':
+          selected_answer = request.form['sel']
+          correct_answer = request.form['correct']
+          task_version = request.form['ver']
+          time_taken = request.form['timetak']
 
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=1, task_id=1, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
