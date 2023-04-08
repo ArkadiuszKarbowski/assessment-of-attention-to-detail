@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
-from models import Users
+from .models import Users
 
 
 def create_app():
