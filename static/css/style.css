@@ -10,7 +10,11 @@ form {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
-
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .correct {
   background-color: lightgreen;
 }
@@ -18,3 +22,4 @@ form {
 .incorrect {
   background-color: lightcoral;
 }
+
