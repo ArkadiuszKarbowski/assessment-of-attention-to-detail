@@ -68,7 +68,7 @@ def create_app():
           correct_answer = request.form['correct']
           task_version = request.form['ver']
           time_taken = request.form['timetak']
-
+          print(selected_answer, correct_answer, task_version, time_taken)
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=1, task_id=1, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
         db.session.add(new_result)
