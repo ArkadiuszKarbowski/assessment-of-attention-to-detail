@@ -5,8 +5,12 @@ import os
 def create_app():
     app = Flask(__name__)
 
-
+    #coś zmienne srodowiskowe mi nie działają więc
+    #to lokalnie:
+    #app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://attention_to_detail_db_user:DFykAjgLeZjqvCuL5mjtlk9nFXoy1GMf@dpg-cgo5pn5269v5rja7nbug-a.frankfurt-postgres.render.com/attention_to_detail_db"
+    #a to na renderze:
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db = SQLAlchemy(app)
