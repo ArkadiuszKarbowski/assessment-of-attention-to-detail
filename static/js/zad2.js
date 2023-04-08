@@ -62,19 +62,19 @@ function stopTimer() {
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
   alert(`Czas wykonywania zadania: ${timeSpent} sekund`);
-}
 
-const answerRadios = document.querySelectorAll('input[name="answer"]');
-answerRadios.forEach((answerRadio) => {
-  answerRadio.addEventListener("change", (event) => {
-    selectedAnswer = event.target.value;
-  });
-});
+  // add this line to set the timeSpent variable
+  const timeSpentInput = document.createElement("input");
+  timeSpentInput.setAttribute("type", "hidden");
+  timeSpentInput.setAttribute("name", "timeSpent");
+  timeSpentInput.setAttribute("value", timeSpent);
+  formContainer.appendChild(timeSpentInput);
+}
 
 $.ajax({
   url: "/page6",
   type: "POST",
-  data: { ver: randomNumber, correct: odp_pop, timetak: timeSpent, sel: selectedAnswer },
+  data: { ver: randomNumber, correct: odp_pop, timeSpent: timeSpent, sel: selectedAnswer },
   success: function(response) {
     console.log(response);
     window.location.href = "/page7";
