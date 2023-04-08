@@ -56,12 +56,25 @@ let selectedAnswer;
 function startTimer() {
   czas = performance.now();
 }
-
+$.ajax({
+    url: "/page6",
+    type: "POST",
+    data: { ver: randomNumber, correct: odp_pop, timetak: timeSpent, sel: selectedAnswer },
+    success: function(response) {
+      console.log(response);
+      
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
+    }
+  });
+}
 function stopTimer() {
   const endTime = performance.now();
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
   alert(`Czas wykonywania zadania: ${timeSpent} sekund`);
+  window.location.href = "/page7";
 
   
 
@@ -71,16 +84,3 @@ answerRadios.forEach((answerRadio) => {
     selectedAnswer = event.target.value;
   });
 });
-$.ajax({
-    url: "/page6",
-    type: "POST",
-    data: { ver: randomNumber, correct: odp_pop, timetak: timeSpent, sel: selectedAnswer },
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page7";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
-}
