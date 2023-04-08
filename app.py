@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -50,8 +50,17 @@ def create_app():
     except Exception as e:
       db.session.rollback()
       print(str(e))
-    return render_template('index.html')
-
+    return redirect('/page3')
+  
+  @app.route('/page3')
+  def page3():
+    return render_template('spot-typo.html')
+  @app.route('/page4')
+  def page4():
+    return render_template('zad2.html')
+  @app.route('/page5')
+  def page5():
+    return render_template('zad3.html')
   if __name__ == "__main__":
     app.run(debug=True)
 
