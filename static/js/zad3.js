@@ -33,19 +33,20 @@ for (let i = 0; i < hasla.length; i++) {
 
 // Tworzenie listy checkboxów
 const checkboxy = document.createElement('div');
-// Usunięcie losowego znaku z odbicia lustrzanego hasła '5g@K9zJt'
-const index1 = hasla.indexOf('5g@K9zJt');
-const odbicie1 = odbicia[index1].split('');
-const randIndex1 = Math.floor(Math.random() * odbicie1.length);
-odbicie1.splice(randIndex1, 1);
-odbicia[index1] = odbicie1.join('');
+// Wybrane hasła, których odbicie lustrzane ma być błędne
+const haslaDoPoprawki = ['5g@K9zJt', 'fU6j$W9b'];
+// Wybrane litery, które zostaną dodane w złych miejscach
+const literyDoDodania = ['a', 'b'];
 
-// Usunięcie losowego znaku z odbicia lustrzanego hasła 'fU6j$W9b'
-const index2 = hasla.indexOf('fU6j$W9b');
-const odbicie2 = odbicia[index2].split('');
-const randIndex2 = Math.floor(Math.random() * odbicie2.length);
-odbicie2.splice(randIndex2, 1);
-odbicia[index2] = odbicie2.join('');
+// Usuwanie losowego znaku z wybranych haseł i dodawanie litery w złym miejscu
+for (let i = 0; i < haslaDoPoprawki.length; i++) {
+  const haslo = haslaDoPoprawki[i];
+  const index = hasla.indexOf(haslo);
+  const odbicie = odbicia[index].split('');
+  const randIndex = Math.floor(Math.random() * odbicie.length);
+  odbicie[randIndex] = literyDoDodania[i];
+  odbicia[index] = odbicie.join('');
+}
 for (let i = 0; i < hasla.length; i++) {
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
