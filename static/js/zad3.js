@@ -1,70 +1,42 @@
-// Tablica z hasłami
-const hasla = ["pies", "kot", "ptak", "krokodyl", "słoń", "krokodyl", "ryba", "krowa"];
+// Tworzenie tablicy z hasłami i ich odbiciami lustrzanymi
+const hasla = ['kajak', 'ala', 'radar', 'potop', 'kajak', 'oko', 'radar', 'potop'];
+const odbicia = hasla.map(haslo => haslo.split('').reverse().join(''));
 
-// Wylosowanie indeksu hasła, które będzie miało złe odbicie lustrzane
-const indeksZlego = Math.floor(Math.random() * hasla.length);
+// Losowe przemieszanie hasel
+for (let i = hasla.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [hasla[i], hasla[j]] = [hasla[j], hasla[i]];
+  [odbicia[i], odbicia[j]] = [odbicia[j], odbicia[i]];
+}
 
-// Tworzenie tabeli
-const table = document.createElement("table");
+// Tworzenie tabeli i wypełnienie jej danymi
+const tabela = document.createElement('table');
+const thead = tabela.createTHead();
+const row = thead.insertRow();
+row.insertCell().innerText = 'Hasło ID';
+row.insertCell().innerText = 'Hasło';
+row.insertCell().innerText = 'Odbicie lustrzane';
 
-// Dodawanie wierszy do tabeli
+const tbody = tabela.createTBody();
 for (let i = 0; i < hasla.length; i++) {
-  const row = document.createElement("tr");
-
-  // Dodawanie ID hasła do pierwszej kolumny
-  const idCell = document.createElement("td");
-  idCell.textContent = i + 1;
-  row.appendChild(idCell);
-
-  // Dodawanie hasła do drugiej kolumny
-  const hasloCell = document.createElement("td");
-  hasloCell.textContent = hasla[i];
-  row.appendChild(hasloCell);
-
-  // Dodawanie odbicia lustrzanego do trzeciej kolumny
-  const odbicieCell = document.createElement("td");
-  const odbicie = i === indeksZlego ? odwroc(hasla[i]) : odwroc(hasla[Math.floor(Math.random() * hasla.length)]);
-  odbicieCell.textContent = odbicie;
-  row.appendChild(odbicieCell);
-
-  table.appendChild(row);
+  const row = tbody.insertRow();
+  row.insertCell().innerText = (i + 1).toString();
+  row.insertCell().innerText = hasla[i];
+  row.insertCell().innerText = odbicia[i];
 }
 
-// Dodawanie tabeli do strony
-const tableContainer = document.getElementById("table-container");
-tableContainer.appendChild(table);
-
-let odp_pop = indeksZlego + 1;
-let odp_uz = null;
-
-function odwroc(haslo) {
-  return haslo.split("").reverse().join("");
+// Tworzenie listy checkboxów
+const checkboxy = document.createElement('div');
+for (let i = 0; i < hasla.length; i++) {
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.value = (i + 1).toString();
+  const label = document.createElement('label');
+  label.innerText = (i + 1).toString();
+  checkboxy.appendChild(checkbox);
+  checkboxy.appendChild(label);
 }
 
-function startTimer() {
-  czas = performance.now();
-}
-
-function stopTimer() {
-  const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
-  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  alert(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  window.location.href = "/page7";
-}
-
-// Dodanie event listenera na kliknięcie w komórkę z hasłem
-table.addEventListener("click", function(event) {
-  const target = event.target;
-  if (target.tagName === "TD" && target.cellIndex === 2) { // Kliknięto w trzecią kolumnę
-    const row = target.parentNode;
-    const id = parseInt(row.cells[0].textContent);
-    odp_uz = id;
-    if (id === odp_pop) {
-      alert("Dobrze!");
-    } else {
-      alert("Źle!");
-    }
-  }
-});
-
+// Dodanie tabeli i listy checkboxów do dokumentu
+document.body.appendChild(tabela);
+document.body.appendChild(checkboxy);
