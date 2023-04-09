@@ -68,3 +68,39 @@ leftColumn.appendChild(document.createElement('br')); // dodanie przejścia do n
 const rightColumn = document.getElementById('right');
 rightColumn.appendChild(document.createElement('h2')).innerText = 'Wybierz hasła, których odbicie lustrzane jest błędne';
 rightColumn.appendChild(checkboxy);
+
+let czas;
+let selectedAnswer;
+let timeSpent; // zmienna zdefiniowana na początku skryptu
+
+function startTimer() {
+  czas = performance.now();
+}
+
+function stopTimer() {
+  const endTime = performance.now();
+  const timeSpent = (endTime - czas) / 1000;
+  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+
+  let selectedAnswers = '';
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  for (let i = 0; i < checkboxes.length; i++) {
+  selectedAnswers += checkboxes[i].value;
+  if (i < checkboxes.length - 1) {
+    selectedAnswers += ', ';
+  }
+  }  
+
+  $.ajax({
+    url: "/page9",
+    type: "POST",
+    data: { correct: correct, timetak: timeSpent, sel: selectedAnswer },
+    success: function(response) {
+      console.log(response);
+      window.location.href = "/page10";
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
+    }
+  });
+}

@@ -103,6 +103,25 @@ def create_app():
   @app.route('/page8')
   def page8():
     return render_template('zad3.html')
+  @app.route('/page9', methods=['GET', 'POST'])
+  def page9():
+    global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
+    try:
+        if request.method == 'POST':
+          selected_answer = request.form['sel']
+          correct_answer = request.form['correct']
+          time_taken = request.form['timetak']
+        # Create a new TestResult object and add it to the database
+        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
+        db.session.add(new_result)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page10')
+  @app.route('/page10')
+  def page10():
+    return render_template('zad4.html')
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
 
