@@ -1,7 +1,7 @@
 // Pobieramy elementy paragrafów
 const leftColumn = document.querySelector("#left p");
 const rightColumn = document.querySelector("#right p");
-const suma = 0;
+let suma = 0;
 // Dzielimy zawartość paragrafów na słowa
 const leftWords = leftColumn.textContent
   .trim()
