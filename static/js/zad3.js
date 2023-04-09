@@ -17,14 +17,18 @@ row.insertCell().innerText = 'Hasło ID';
 row.insertCell().innerText = 'Hasło';
 row.insertCell().innerText = 'Odbicie lustrzane';
 
-
+for (let i = 0; i < hasla.length; i++) {
+  if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
+    correct = i + ',' ;
+  }
+}
 
 // Tworzenie listy checkboxów
 const checkboxy = document.createElement('div');
 // Wybrane hasła, których odbicie lustrzane ma być błędne
 const haslaDoPoprawki = ['5g@K9zJt', 'fU6j$W9b'];
 // Wybrane litery, które zostaną dodane w złych miejscach
-const literyDoDodania = ['a', 'b'];
+const literyDoDodania = ['a', 'd'];
 
 // Usuwanie losowego znaku z wybranych haseł i dodawanie litery w złym miejscu
 for (let i = 0; i < haslaDoPoprawki.length; i++) {
@@ -43,10 +47,6 @@ for (let i = 0; i < hasla.length; i++) {
   row.insertCell().innerText = odbicia[i];
   row.style.border = '1px solid black'; // dodanie obramowania dla komórek
   
-  // Zapisywanie indeksów dla określonych haseł
-  if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
-    correct = i + ',' ;
-  }
 }
 for (let i = 0; i < hasla.length; i++) {
   const checkbox = document.createElement('input');
