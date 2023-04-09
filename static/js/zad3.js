@@ -23,6 +23,7 @@ for (let i = 0; i < hasla.length; i++) {
   row.insertCell().innerText = (i + 1).toString();
   row.insertCell().innerText = hasla[i];
   row.insertCell().innerText = odbicia[i];
+  row.style.border = '1px solid black'; // dodanie obramowania dla komórek
 }
 
 // Tworzenie listy checkboxów
@@ -38,5 +39,6 @@ for (let i = 0; i < hasla.length; i++) {
 }
 
 // Dodanie tabeli i listy checkboxów do dokumentu
-document.body.appendChild(tabela);
-document.body.appendChild(checkboxy);
+const formContainer = document.getElementById('form-container');
+formContainer.appendChild(tabela);
+formContainer.appendChild(checkboxy);

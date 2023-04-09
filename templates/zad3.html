@@ -16,6 +16,10 @@
 			padding: 20px;
 			box-sizing: border-box;
 		}
+
+		td {
+			border: 1px solid black;
+		}
 	</style>
 
 	<script>
@@ -31,13 +35,30 @@
 			<p>Prosimy o wypełnienie poniższego formularza.</p>
 		</div>
 		<form id="form-container">
-			<div class="column" id="left">
-				<p></p>
+			<div class="row">
+				<div class="column">
+					<h2>Hasła</h2>
+					<table id="hasla-table">
+						<thead>
+							<tr>
+								<th>Hasło ID</th>
+								<th>Hasło</th>
+								<th>Odbicie lustrzane</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- tablica zostanie wygenerowana dynamicznie przez JavaScript -->
+						</tbody>
+					</table>
+				</div>
+				<div class="column">
+					<h2>Wybierz hasła</h2>
+					<div id="checkboxy">
+						<!-- lista zostanie wygenerowana dynamicznie przez JavaScript -->
+					</div>
+				</div>
 			</div>
-			<div class="column" id="right">
-				<p></p>
-			</div>
-			<button class="btn btn-primary mb-3" type="button" onclick='window.location.href = "/page8"'>Dalej </button>
+			<button class="btn btn-primary mb-3" type="button" onclick='window.location.href = "/page8"'>Dalej</button>
 		</form>
 	</div>
 	
