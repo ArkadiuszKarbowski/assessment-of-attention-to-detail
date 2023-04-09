@@ -12,7 +12,6 @@ def create_app():
 
   from models.users import Users
   from models.task_results import TestResult
-  from models.tasks import Tasks
 
   #coś zmienne srodowiskowe mi nie działają więc
   #to lokalnie:
