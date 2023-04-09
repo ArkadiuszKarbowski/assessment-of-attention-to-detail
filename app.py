@@ -4,6 +4,8 @@ import os
 
 db = SQLAlchemy()
 
+last_user_id = None  # Dodajemy zmienną last_user_id w zakresie globalnym i przypisujemy None
+
 
 def create_app():
   app = Flask(__name__)
@@ -25,11 +27,14 @@ def create_app():
   @app.route("/")
   def index():
     return render_template('home.html')
+
   @app.route("/page2")
   def page2():
     return render_template('test.html')
+
   @app.route('/page3', methods=['GET', 'POST'])
   def page3():
+    global last_user_id  # dodajemy global, aby móc modyfikować wartość zmiennej last_user_id
     try:
       if request.method == 'POST':
         first_name = request.form['imie']
@@ -49,6 +54,7 @@ def create_app():
                       age=age)
       db.session.add(new_user)
       db.session.commit()
+      last_user_id = new_user.id
     except Exception as e:
       db.session.rollback()
       print(str(e))
@@ -57,11 +63,14 @@ def create_app():
   @app.route('/page4')
   def page4():
     return render_template('spot-typo.html')
+
   @app.route('/page5')
   def page5():
     return render_template('zad2.html')
+
   @app.route('/page6', methods=['GET', 'POST'])
   def page6():
+    global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
     try:
         if request.method == 'POST':
           selected_answer = request.form['sel']
@@ -70,7 +79,7 @@ def create_app():
           time_taken = request.form['timetak']
           print(selected_answer, correct_answer, task_version, time_taken)
         # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=1, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
+        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
         db.session.add(new_result)
         db.session.commit()
     except Exception as e:
