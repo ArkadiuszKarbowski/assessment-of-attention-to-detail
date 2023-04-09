@@ -35,13 +35,17 @@ for (let i = 0; i < hasla.length; i++) {
 const checkboxy = document.createElement('div');
 // Usunięcie losowego znaku z odbicia lustrzanego hasła '5g@K9zJt'
 const index1 = hasla.indexOf('5g@K9zJt');
-const randIndex1 = Math.floor(Math.random() * odbicia[index1].length);
-odbicia[index1].splice(randIndex1, 1);
+const odbicie1 = odbicia[index1].split('');
+const randIndex1 = Math.floor(Math.random() * odbicie1.length);
+odbicie1.splice(randIndex1, 1);
+odbicia[index1] = odbicie1.join('');
 
 // Usunięcie losowego znaku z odbicia lustrzanego hasła 'fU6j$W9b'
 const index2 = hasla.indexOf('fU6j$W9b');
-const randIndex2 = Math.floor(Math.random() * odbicia[index2].length);
-odbicia[index2].splice(randIndex2, 1);
+const odbicie2 = odbicia[index2].split('');
+const randIndex2 = Math.floor(Math.random() * odbicie2.length);
+odbicie2.splice(randIndex2, 1);
+odbicia[index2] = odbicie2.join('');
 for (let i = 0; i < hasla.length; i++) {
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
