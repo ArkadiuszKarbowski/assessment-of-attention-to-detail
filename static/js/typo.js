@@ -1,7 +1,7 @@
 // Pobieramy elementy paragrafów
 const leftColumn = document.querySelector("#left p");
 const rightColumn = document.querySelector("#right p");
-
+const suma = 0;
 // Dzielimy zawartość paragrafów na słowa
 const leftWords = leftColumn.textContent
   .trim()
@@ -30,6 +30,7 @@ for (let i = 0; i < leftWords.length; i++) {
         span.style.color = "green";
       } else {
         span.style.backgroundColor = "red";
+        suma++;
       }
     });
 
@@ -37,4 +38,27 @@ for (let i = 0; i < leftWords.length; i++) {
     leftColumn.appendChild(span);
   }
 }
+let czas;
+let timeSpent;
+function startTimer() {
+  czas = performance.now();
+}
 
+function stopTimer() {
+  const endTime = performance.now();
+  const timeSpent = (endTime - czas) / 1000;
+  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+
+  $.ajax({
+    url: "/page5",
+    type: "POST",
+    data: { timetak: timeSpent, sum: suma},
+    success: function(response) {
+      console.log(response);
+      window.location.href = "/page6";
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
+    }
+  });
+}

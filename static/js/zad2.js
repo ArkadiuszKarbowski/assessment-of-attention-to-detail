@@ -64,12 +64,12 @@ function stopTimer() {
   const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
   $.ajax({
-    url: "/page6",
+    url: "/page7",
     type: "POST",
     data: { ver: randomNumber, correct: odp_pop, timetak: timeSpent, sel: selectedAnswer },
     success: function(response) {
       console.log(response);
-      window.location.href = "/page7";
+      window.location.href = "/page8";
     },
     error: function(xhr, status, error) {
       console.log(xhr.responseText);

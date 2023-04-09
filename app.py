@@ -62,13 +62,29 @@ def create_app():
   @app.route('/page4')
   def page4():
     return render_template('spot-typo.html')
-
+    
   @app.route('/page5')
   def page5():
+    global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
+    try:
+        if request.method == 'POST':
+          selected_answer = request.form['sum']
+          time_taken = request.form['timetak']
+        # Create a new TestResult object and add it to the database
+        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
+        db.session.add(new_result)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page6')
+    
+  @app.route('/page6')
+  def page6():
     return render_template('zad2.html')
 
-  @app.route('/page6', methods=['GET', 'POST'])
-  def page6():
+  @app.route('/page7', methods=['GET', 'POST'])
+  def page7():
     global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
     try:
         if request.method == 'POST':
@@ -76,7 +92,6 @@ def create_app():
           correct_answer = request.form['correct']
           task_version = request.form['ver']
           time_taken = request.form['timetak']
-          print(selected_answer, correct_answer, task_version, time_taken)
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=2)
         db.session.add(new_result)
@@ -84,9 +99,9 @@ def create_app():
     except Exception as e:
         db.session.rollback()
         print(str(e))
-    return redirect('/page7')
-  @app.route('/page7')
-  def page7():
+    return redirect('/page8')
+  @app.route('/page8')
+  def page8():
     return render_template('zad3.html')
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
