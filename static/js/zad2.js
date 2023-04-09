@@ -27,7 +27,7 @@ const answers = [
   "Odpowiedź 6",
 ];
 const odp = [5,3,1,4];
-const odp_pop = odp[randomNumber]-1;
+const odp_pop = odp[randomNumber - 1];
 const answerList = document.createElement("ul");
 answerList.setAttribute("id", "answer-list");
 
