@@ -94,7 +94,7 @@ function stopTimer() {
   $.ajax({
     url: "/page9",
     type: "POST",
-    data: { correct: correct, timetak: timeSpent, sel: selectedAnswer },
+    data: { correct: correct, timetak: timeSpent, sel: selectedAnswers },
     success: function(response) {
       console.log(response);
       window.location.href = "/page10";
