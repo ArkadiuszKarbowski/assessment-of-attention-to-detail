@@ -17,19 +17,7 @@ row.insertCell().innerText = 'Hasło ID';
 row.insertCell().innerText = 'Hasło';
 row.insertCell().innerText = 'Odbicie lustrzane';
 
-const tbody = tabela.createTBody();
-for (let i = 0; i < hasla.length; i++) {
-  const row = tbody.insertRow();
-  row.insertCell().innerText = (i + 1).toString();
-  row.insertCell().innerText = hasla[i];
-  row.insertCell().innerText = odbicia[i];
-  row.style.border = '1px solid black'; // dodanie obramowania dla komórek
-  
-  // Zapisywanie indeksów dla określonych haseł
-  if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
-    correct = i + ',' ;
-  }
-}
+
 
 // Tworzenie listy checkboxów
 const checkboxy = document.createElement('div');
@@ -46,6 +34,19 @@ for (let i = 0; i < haslaDoPoprawki.length; i++) {
   const randIndex = Math.floor(Math.random() * odbicie.length);
   odbicie[randIndex] = literyDoDodania[i];
   odbicia[index] = odbicie.join('');
+}
+const tbody = tabela.createTBody();
+for (let i = 0; i < hasla.length; i++) {
+  const row = tbody.insertRow();
+  row.insertCell().innerText = (i + 1).toString();
+  row.insertCell().innerText = hasla[i];
+  row.insertCell().innerText = odbicia[i];
+  row.style.border = '1px solid black'; // dodanie obramowania dla komórek
+  
+  // Zapisywanie indeksów dla określonych haseł
+  if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
+    correct = i + ',' ;
+  }
 }
 for (let i = 0; i < hasla.length; i++) {
   const checkbox = document.createElement('input');
