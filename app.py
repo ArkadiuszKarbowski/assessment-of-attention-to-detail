@@ -63,7 +63,7 @@ def create_app():
   def page4():
     return render_template('spot-typo.html')
     
-  @app.route('/page5')
+  @app.route('/page5', methods=['GET', 'POST'])
   def page5():
     global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
     try:
