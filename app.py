@@ -79,7 +79,7 @@ def create_app():
           time_taken = request.form['timetak']
           print(selected_answer, correct_answer, task_version, time_taken)
         # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken)
+        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=2)
         db.session.add(new_result)
         db.session.commit()
     except Exception as e:

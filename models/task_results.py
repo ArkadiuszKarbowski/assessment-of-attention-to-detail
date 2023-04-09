@@ -9,7 +9,7 @@ class TestResult(db.Model):
     correct_answer = db.Column(db.Text, nullable=False)
     task_version = db.Column(db.Integer, nullable=False)
     time_taken = db.Column(db.Integer, nullable=False)
-
+    task_number = db.Column(db.Integer)
     
     def __repr__(self):
-        return f'<TestResult id={self.id}, user_id={self.user_id},  task_version={self.task_version}, time_taken={self.time_taken}, timestamp={self.timestamp}>'
+        return f'<TestResult id={self.id}, user_id={self.user_id},  task_version={self.task_version}, time_taken={self.time_taken}, timestamp={self.timestamp}, task_number={self.task_number}>'
