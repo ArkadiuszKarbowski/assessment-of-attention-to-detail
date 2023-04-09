@@ -7,7 +7,7 @@
 	<!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="static/css/style.css">
-
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='fav.png') }}">
   <style>
 		.column {
 			display: inline-block;
@@ -26,7 +26,7 @@
     <p>Prosimy o wypełnienie poniższego formularza.</p>
   </div>
     <form id="form-container">
-
+      <p>Zaznacz 2 słowa w tekście z lewej strony, którymi różni się od tekstu po prawej.</p>
       <div class="column" id="left">
 		<p>Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile ci trzeba cenić, ten tylko się dowie, Kto cię straci. Dzięki pięknotwórczej całości ozdobie Widzę i opisuję, bo tęsknię po tobie. Panno święta, co jasnej bronisz Częstochowy I w Ostrej świecisz Bramie! Ty, co gród zamkowy Nowogródzki ochraniasz z jego wiernym ludem! Jak mnie dziecko do zdrowia powróciło cudem (Gdy od płaczącej matki pod Twoją opiekę Ofiarowany, martwy podniosłem powiekę I zaraz mogłem pieszo do Twych świątyń progu Iść za wrócone życie podziękować Bogu), Tak nas powrócisz cudem na Ojczyzny łono.</p>
 	</div>
@@ -34,7 +34,7 @@
 		<p>Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. IIe ci trzeba cenić, ten tylko się dowie, Kto cie straci. Dzięki pięknotwórczej całości ozdobie Widzę i opisuję, bo tęsknię po tobie. Panno święta, co jasnej bronisz Częstochowy I w Ostrej świecisz Bramie! Ty, co gród zamkowy Nowogródzki ochraniasz z jego wiernym ludem! Jak mnie dziecko do zdrowia powróciło cudem (Gdy od płaczącej matki pod Twoją opiekę Ofiarowany, martwy podniosłem powiekę I zaraz mogłem pieszo do Twych świątyń progu Iść za wrócone życie podziękować Bogu), Tak nas powrócisz cudem na Ojczyzny łono.</p>
 	</div>
      
-      <button tm-5  class="btn btn-primary mb-3" type="button" onclick="window.location.href='/page5'">Click here</button>
+      <button tm-5  class="btn btn-primary mb-3" type="button" onclick="window.location.href='/page5'">Dalej </button>
     </form>
   </div>
 
