@@ -118,7 +118,7 @@ def create_app():
 
   @app.route('/page10')
   def page10():
-    return render_template('end.html')
+    return render_template('zad4.html')
 
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
