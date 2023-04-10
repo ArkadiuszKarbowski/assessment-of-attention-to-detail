@@ -11,7 +11,12 @@ def create_app():
   from models.users import Users
   from models.task_results import TestResult
 
+  #coś zmienne srodowiskowe mi nie działają więc
+  #to lokalnie:
+  #app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://attention_to_detail_db_user:DFykAjgLeZjqvCuL5mjtlk9nFXoy1GMf@dpgcgo5pn5269v5rja7nbug-a.frankfurt-postgres.render.com/attention_to_detail_db"
+  #a to na renderze:
   app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
+
   app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
   db.init_app(app)
@@ -117,3 +122,7 @@ def create_app():
   @app.route('/page10')
   def page10():
     return render_template('zad4.html')
+  if __name__ == "__main__":
+    app.run(host= '0.0.0.0', debug=True)
+
+  return app
