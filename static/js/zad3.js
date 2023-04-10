@@ -19,7 +19,7 @@ row.insertCell().innerText = 'Odbicie lustrzane';
 
 for (let i = 0; i < hasla.length; i++) {
   if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
-    correct = i + ',' ;
+    correct += i + '' ;
   }
 }
 
@@ -87,7 +87,7 @@ function stopTimer() {
   for (let i = 0; i < checkboxes.length; i++) {
   selectedAnswers += checkboxes[i].value;
   if (i < checkboxes.length - 1) {
-    selectedAnswers += ', ';
+    selectedAnswers += '';
   }
   }  
 
