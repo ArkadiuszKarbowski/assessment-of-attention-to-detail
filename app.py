@@ -118,7 +118,28 @@ def create_app():
   @app.route('/page10')
   def page10():
     return render_template('zad4.html')
-
+  @app.route('/page11')
+  def page11():
+    return render_template('zad4pyt.html')
+  @app.route('/page12', methods=['GET', 'POST'])
+  def page12():
+    try:
+        if request.method == 'POST':
+          selected_answer = request.form['sel']
+          correct_answer = request.form['correct']
+          time_taken = request.form['timetak']
+          task_version = request.form['ver']
+        # Create a new TestResult object and add it to the database
+        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=4)
+        db.session.add(new_result)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page13')
+  @app.route('/page13')
+  def page13():
+    return render_template('zad5.html')
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
 
