@@ -1,10 +1,11 @@
 // definicja odgłosów zwierząt
-const animalSounds = ['moo', 'meow', 'woof', 'oink'];
+const animalSounds = ["dog1", "dog2", "dog3", "dog4"];
+
 
 // funkcja odtwarzająca odgłosy zwierząt w tle
 function playAnimalSounds() {
   animalSounds.forEach((sound) => {
-    const audio = new Audio(`static/sounds/${sound}.mp3`);
+    const audio = new Audio(`static/${sound}.mp3`);
     audio.loop = true;
     audio.play();
   });
