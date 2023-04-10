@@ -1,28 +1,30 @@
-// definicja odgłosów zwierząt
 const animalSounds = ["dog1", "dog2", "dog3", "dog4"];
+let index = 0;
 
-
-// funkcja odtwarzająca odgłosy zwierząt w tle
 function playAnimalSounds() {
-  animalSounds.forEach((sound) => {
-    const audio = new Audio(`static/${sound}.mp3`);
-    audio.loop = true;
-    audio.play();
-  });
+  const sound = animalSounds[index];
+  const audio = new Audio(`static/${sound}.mp3`);
+  audio.loop = true;
+  audio.onended = function() {
+    index++;
+    if (index >= animalSounds.length) {
+      index = 0;
+    }
+    playAnimalSounds();
+  };
+  audio.play();
 }
 
-// funkcja pobierająca wartości z inputów i zapisująca je w zmiennej selectedanswer
 function getSelectedAnswer() {
   const nr1 = document.getElementById('nr1').value;
   const nr2 = document.getElementById('nr2').value;
   const selectedanswer = `${nr1}${nr2}`;
 }
 
-// odtwarzanie odgłosów zwierząt w tle
 playAnimalSounds();
 let czas;
 let selectedAnswer;
-let timeSpent; // zmienna zdefiniowana na początku skryptu
+let timeSpent;
 
 function startTimer() {
   czas = performance.now();
@@ -30,7 +32,7 @@ function startTimer() {
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   $.ajax({
