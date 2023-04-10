@@ -21,22 +21,18 @@
 			border: 1px solid black;
 		}
 	</style>
-    <script type="text/javascript">
-		var audioPlayed = false;
+   <script type="text/javascript">
+    var isPlaying = false;
 		function playAudio() {
-			var audio = new Audio('static/muzyka.mp4');
-			audio.play();
-			audio.onended = function() {
-				audioPlayed = true;
-				document.getElementById("odsluchajBtn").disabled = true;
-				document.getElementById("dalejBtn").disabled = false;
-			};
-		}
-		window.onload = function() {
-			if (audioPlayed) {
-				document.getElementById("odsluchajBtn").disabled = true;
-				document.getElementById("dalejBtn").disabled = false;
-			}
+      if (!isPlaying) {
+        var audio = new Audio('static/muzyka.mp4');
+        audio.play();
+        isPlaying = true;
+        audio.onended = function() {
+          document.getElementById("dalejBtn").disabled = false;
+          document.getElementById("odsluchajBtn").disabled = true;
+        };
+      }
 		}
 	</script>
 </head>
