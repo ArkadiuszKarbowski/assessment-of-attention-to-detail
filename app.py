@@ -105,10 +105,9 @@ def create_app():
         if request.method == 'POST':
           selected_answer = request.form['sel']
           correct_answer = request.form['correct']
-          task_version = request.form['ver']
           time_taken = request.form['timetak']
         # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=3)
+        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
         db.session.add(new_result)
         db.session.commit()
     except Exception as e:
