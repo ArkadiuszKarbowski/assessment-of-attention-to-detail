@@ -82,7 +82,7 @@ def create_app():
 
   @app.route('/page7', methods=['GET', 'POST'])
   def page7():
-    global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
+    user_id = session.get('user_id')
     try:
         if request.method == 'POST':
           selected_answer = request.form['sel']
@@ -90,7 +90,7 @@ def create_app():
           task_version = request.form['ver']
           time_taken = request.form['timetak']
         # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=2)
+        new_result = TestResult(user_id=user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=2)
         db.session.add(new_result)
         db.session.commit()
     except Exception as e:
@@ -104,14 +104,14 @@ def create_app():
 
   @app.route('/page9', methods=['GET', 'POST'])
   def page9():
-    global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
+    user_id = session.get('user_id')
     try:
         if request.method == 'POST':
           selected_answer = request.form['sel']
           correct_answer = request.form['correct']
           time_taken = request.form['timetak']
         # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=last_user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
+        new_result = TestResult(user_id=user_id, selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
         db.session.add(new_result)
         db.session.commit()
     except Exception as e:
