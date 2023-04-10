@@ -14,7 +14,6 @@ function playAnimalSounds() {
       index = 0;
     }
     playAnimalSounds();
-    index++;
   };
   audio.play();
 }
@@ -37,6 +36,8 @@ function stopTimer() {
   const endTime = performance.now();
   timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+
+  getSelectedAnswer();
 
   $.ajax({
     url: "/page16",
