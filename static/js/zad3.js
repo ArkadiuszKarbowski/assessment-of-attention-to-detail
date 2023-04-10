@@ -19,7 +19,7 @@ row.insertCell().innerText = 'Odbicie lustrzane';
 
 for (let i = 0; i < hasla.length; i++) {
   if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
-    correct += i + '' ;
+    correct += (i + 1);
   }
 }
 
