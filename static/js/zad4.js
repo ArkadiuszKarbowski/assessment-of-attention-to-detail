@@ -21,6 +21,8 @@ for (var i = 0; i < answers.length; i++) {
 // Wyświetlanie pytania i odpowiedzi na stronie
 document.getElementById("question-container").innerHTML = question;
 
+let czas;
+let timeSpent;
 // Zapisywanie wybranej odpowiedzi do zmiennej selected
 var selectedAnswer;
 function startTimer() {
