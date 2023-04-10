@@ -80,6 +80,7 @@ def create_app():
   def page6():
     return render_template('zad2.html')
 
+  
   @app.route('/page7', methods=['GET', 'POST'])
   def page7():
     user_id = session.get('user_id')
