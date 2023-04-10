@@ -21,14 +21,22 @@
 			border: 1px solid black;
 		}
 	</style>
-  <script type="text/javascript">
+    <script type="text/javascript">
+		var audioPlayed = false;
 		function playAudio() {
 			var audio = new Audio('static/muzyka.mp4');
 			audio.play();
 			audio.onended = function() {
+				audioPlayed = true;
 				document.getElementById("odsluchajBtn").disabled = true;
 				document.getElementById("dalejBtn").disabled = false;
 			};
+		}
+		window.onload = function() {
+			if (audioPlayed) {
+				document.getElementById("odsluchajBtn").disabled = true;
+				document.getElementById("dalejBtn").disabled = false;
+			}
 		}
 	</script>
 </head>
