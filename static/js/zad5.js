@@ -17,9 +17,7 @@ function stopTimer() {
   const endTime = performance.now();
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-
-  const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
-
+  const selectedAnswer = document.getElementById("odp").value;
   $.ajax({
       url: "/page14",
       type: "POST",
