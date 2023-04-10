@@ -1,10 +1,8 @@
 const leftImageSrc = 'static/trojkat.png';
-
+const leftColumn = document.getElementById("left");
 // Tworzymy element obrazka w lewej kolumnie
 const leftImage = document.createElement("img");
 leftImage.src = leftImageSrc;
-
-const leftColumn = document.getElementById("left");
 leftColumn.appendChild(leftImage);
 
 let czas;
@@ -23,7 +21,6 @@ function stopTimer() {
   const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
   $.ajax({
-    $.ajax({
       url: "/page14",
       type: "POST",
       data: {timetak: timeSpent, sel: selectedAnswer },
