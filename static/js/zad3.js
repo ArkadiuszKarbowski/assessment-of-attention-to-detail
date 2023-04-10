@@ -1,7 +1,7 @@
 // Tworzenie tablicy z hasłami i ich odbiciami lustrzanymi
 const hasla = ['5g@K9zJt', 'x#2Dp8Ls', 'H3qR@t7Z', 'fU6j$W9b', 'N5sT@r2P', 'g#7HkD6c', 'V9nM@p4T', 'e2fL#5tS'];
 const odbicia = hasla.map(haslo => haslo.split('').reverse().join(''));
-let correct = 0;
+let correct = '';
 // Losowe przemieszanie hasel
 for (let i = hasla.length - 1; i > 0; i--) {
   const j = Math.floor(Math.random() * (i + 1));
@@ -19,7 +19,7 @@ row.insertCell().innerText = 'Odbicie lustrzane';
 
 for (let i = 0; i < hasla.length; i++) {
   if (hasla[i] === '5g@K9zJt' || hasla[i] === 'fU6j$W9b') {
-    correct += (i + 1);
+    correct += (i + 1)+'';
   }
 }
 
