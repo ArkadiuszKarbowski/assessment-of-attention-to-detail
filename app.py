@@ -71,12 +71,12 @@ def create_app():
       print(str(e))
     return redirect('/page6')
 
- @app.route('/page6')
-def page6():
+  @app.route('/page6')
+  def page6():
     return render_template('zad2.html')
 
-@app.route('/page7', methods=['GET', 'POST'])
-def page7():
+  @app.route('/page7', methods=['GET', 'POST'])
+  def page7():
     global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
     try:
         if request.method == 'POST':
@@ -93,12 +93,12 @@ def page7():
         print(str(e))
     return redirect('/page8')
 
-@app.route('/page8')
-def page8():
+  @app.route('/page8')
+  def page8():
     return render_template('zad3.html')
 
-@app.route('/page9', methods=['GET', 'POST'])
-def page9():
+  @app.route('/page9', methods=['GET', 'POST'])
+  def page9():
     global last_user_id  # dodajemy global, aby móc odczytywać wartość zmiennej last_user_id
     try:
         if request.method == 'POST':
@@ -114,6 +114,6 @@ def page9():
         print(str(e))
     return redirect('/page10')
 
-@app.route('/page10')
-def page10():
+  @app.route('/page10')
+  def page10():
     return render_template('zad4.html')
