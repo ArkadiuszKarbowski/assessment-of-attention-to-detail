@@ -8,12 +8,14 @@ function playAnimalSounds() {
   sound = animalSounds[index];
   audio = new Audio(`static/${sound}.mp3`);
   audio.loop = true;
-  audio.onended = function() {
+ audio.onended = function() {
+  setTimeout(function() {
     index++;
     if (index >= animalSounds.length) {
       index = 0;
     }
     playAnimalSounds();
+  }, 1000); // opóźnienie 1 sekundy
   };
   audio.play();
 }
