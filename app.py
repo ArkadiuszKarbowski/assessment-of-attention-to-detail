@@ -95,12 +95,12 @@ def create_app():
         print(str(e))
     return redirect('/page8')
 
-@app.route('/page8')
-def page8():
+  @app.route('/page8')
+  def page8():
     return render_template('zad3.html')
 
-@app.route('/page9', methods=['GET', 'POST'])
-def page9():
+  @app.route('/page9', methods=['GET', 'POST'])
+  def page9():
     try:
         if request.method == 'POST':
           selected_answer = request.form['sel']
@@ -116,11 +116,11 @@ def page9():
         print(str(e))
     return redirect('/page10')
 
-@app.route('/page10')
-def page10():
+  @app.route('/page10')
+  def page10():
     return render_template('end.html')
 
-if __name__ == "__main__":
+  if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
 
   return app
