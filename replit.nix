@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+    pkgs.less
     pkgs.postgresql
     pkgs.postgresql_14
     pkgs.python310Full
