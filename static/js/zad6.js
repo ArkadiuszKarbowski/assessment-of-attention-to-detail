@@ -1,10 +1,12 @@
 const animalSounds = ["dog1", "dog2", "dog3", "dog4"];
 let index = 0;
-let selectedanswer; // poprawione
+let selectedanswer; 
+let sound;
+let audio;
 
 function playAnimalSounds() {
-  const sound = animalSounds[index];
-  const audio = new Audio(`static/${sound}.mp3`);
+  sound = animalSounds[index];
+  audio = new Audio(`static/${sound}.mp3`);
   audio.loop = true;
   audio.onended = function() {
     index++;
@@ -12,6 +14,7 @@ function playAnimalSounds() {
       index = 0;
     }
     playAnimalSounds();
+    index++;
   };
   audio.play();
 }
