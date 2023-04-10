@@ -7,7 +7,7 @@ db = SQLAlchemy()
 def create_app():
   app = Flask(__name__)
 
-  app.secret_key = os.getenv('SECRET_KEY')
+  app.secret_key = 'XHAEu7TvJgo5aplAGen57WMQNvvMOPRZ'
 
   from models.users import Users
   from models.task_results import TestResult
