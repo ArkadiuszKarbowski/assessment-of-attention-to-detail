@@ -3,13 +3,13 @@ var x = Math.floor(Math.random() * 4) + 3;
 
 // Tresci odpowiedzi
 var answers = [
-    "granie na gitarze",
-    "ubranie się",
-    "spacer",
-    "odkurzanie",
-    "pranie",
-    "ugotowanie obiadu",
-    "zmywanie naczyń"
+    " granie na gitarze",
+    " ubranie się",
+    " spacer",
+    " odkurzanie",
+    " pranie",
+    " ugotowanie obiadu",
+    " zmywanie naczyń"
 ];
 
 // Tworzenie pytania wraz z odpowiedziami radiowymi

@@ -1,33 +1,47 @@
-const leftImageSrc = 'static/trojkat.png';
-const leftColumn = document.getElementById("left");
-// Tworzymy element obrazka w lewej kolumnie
-const leftImage = document.createElement("img");
-leftImage.src = leftImageSrc;
-leftColumn.appendChild(leftImage);
-
 let czas;
-let selectedAnswer;
-let timeSpent; // zmienna zdefiniowana na początku skryptu
-
+let timeSpent;
+// Zapisywanie wybranej odpowiedzi do zmiennej selected
+var selectedAnswer;
 function startTimer() {
   czas = performance.now();
 }
+// Tresci odpowiedzi
+var answers = [
+    " herbatę",
+    " sok pomarańczowy",
+    " sok jabłkowy",
+    " kawę",
+    " mleko",
+];
+
+// Tworzenie pytania wraz z odpowiedziami radiowymi
+var question = "Co wypiła do śniadania osoba opowiadająca o swoim dniu na poprzednich stronach?"+ "<br>";
+for (var i = 0; i < answers.length; i++) {
+    question += "<input type='radio' name='answer' value='" + answers[i] + "'>" + answers[i] + "<br>";
+}
+
+// Wyświetlanie pytania i odpowiedzi na stronie
+document.getElementById("question-container").innerHTML = question;
+
 
 function stopTimer() {
   const endTime = performance.now();
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  const selectedAnswer = document.getElementById("odp").value;
+
+  selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+  let correct = answers[0];
+
   $.ajax({
-      url: "/page14",
-      type: "POST",
-      data: {timetak: timeSpent, sel: selectedAnswer },
-      success: function(response) {
-        console.log(response);
-        window.location.href = "/page15";
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr.responseText);
-      }
+    url: "/page20",
+    type: "POST",
+    data: {correct: correct, timetak: timeSpent, sel: selectedAnswer },
+    success: function(response) {
+      console.log(response);
+      window.location.href = "/page21";
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
+    }
   });
 }
