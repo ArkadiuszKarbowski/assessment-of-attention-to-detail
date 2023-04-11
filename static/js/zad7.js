@@ -1,7 +1,12 @@
 // inicjalizacja zmiennych
 		var selectedanswer = "";
 		var clickedSquares = [];
+    let czas;
+    let timeSpent; // zmienna zdefiniowana na początku skryptu
 
+    function startTimer() {
+     czas = performance.now();
+    }
 		// dodanie nasłuchiwania kliknięć na kwadratach
 		document.querySelectorAll(".square").forEach(function(square) {
 			square.addEventListener("click", function() {
@@ -9,15 +14,9 @@
 					clickedSquares.push(this); // dodanie klikniętego kwadratu do listy klikniętych
 					selectedanswer += clickedSquares.length; // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
 					}
-				}
 			});
 		});
-let czas;
-let timeSpent; // zmienna zdefiniowana na początku skryptu
 
-function startTimer() {
-  czas = performance.now();
-}
 
 function stopTimer() {
   const endTime = performance.now();
