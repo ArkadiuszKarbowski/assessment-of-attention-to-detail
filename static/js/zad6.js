@@ -1,6 +1,6 @@
 
 let selectedanswer; 
-let audio;
+let audio= new Audio(`static/animals.mp3`);
 
 function playAnimalSounds() {
   if (!isPlaying) {
