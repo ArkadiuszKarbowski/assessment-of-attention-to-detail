@@ -1,7 +1,3 @@
-Oto poprawiony kod JavaScript, który usuwa obrazy po kliknięciu i zapisuje ich id do zmiennej selectedanswer:
-
-js
-Copy code
 var selectedanswer = "";
 var clickedSquares = [];
 let czas;
@@ -19,14 +15,6 @@ function handleClick(square) {
     square.style.backgroundImage = "none"; // usunięcie obrazka
   }
 }
-
-// dodanie obsługi kliknięć na kwadratach
-document.querySelectorAll(".square").forEach(function(square) {
-  square.addEventListener("click", function() {
-    handleClick(square);
-  });
-});
-
 
 function stopTimer() {
   const endTime = performance.now();
