@@ -55,7 +55,7 @@ function stopTimer() {
     data: { timetak: timeSpent, sum: suma},
     success: function(response) {
       console.log(response);
-      window.location.href = "/page";
+      window.location.href = "/page23";
     },
     error: function(xhr, status, error) {
       console.log(xhr.responseText);
