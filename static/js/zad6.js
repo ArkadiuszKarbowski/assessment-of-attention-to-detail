@@ -1,6 +1,11 @@
-
+let czas;
+let timeSpent;
 let selectedanswer; 
 let audio= new Audio(`static/animals.mp3`);
+
+function startTimer() {
+  czas = performance.now();
+}
 
 function playAnimalSounds() {
   if (!isPlaying) {
@@ -21,12 +26,6 @@ function getSelectedAnswer() {
 }
 
 playAnimalSounds();
-let czas;
-let timeSpent;
-
-function startTimer() {
-  czas = performance.now();
-}
 
 function stopTimer() {
   const endTime = performance.now();
