@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
+from models.myform import AnkietaForm
 
 db = SQLAlchemy()
 
@@ -26,10 +27,36 @@ def create_app():
   def index():
     return render_template('home.html')
 
-  @app.route("/page2")
+  @app.route("/page2", methods=['GET', 'POST'])
   def page2():
-    session.clear()
-    return render_template('test.html')
+    form = AnkietaForm()
+    
+    if form.validate_on_submit():
+        session.clear()
+        # Odbieranie danych z formularza
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        study_field = form.study_program.data
+        university = form.university.data
+        email = form.email.data
+        gender = form.gender.data
+        age = form.age.data
+      
+        new_user = Users(first_name=first_name,
+                      last_name=last_name,
+                      study_field=study_field,
+                      university=university,
+                      email=email,
+                      gender=gender,
+                      age=age)
+        db.session.add(new_user)
+        db.session.commit()
+        session['user_id'] = new_user.id
+        
+        print(first_name + gender)
+
+        return redirect('/page4')
+    return render_template('test.html', form=form)
 
   @app.route('/page3', methods=['GET', 'POST'])
   def page3():

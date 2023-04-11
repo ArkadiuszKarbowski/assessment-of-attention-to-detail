@@ -15,42 +15,56 @@
     <h1>Ankieta</h1>
     <p>Prosimy o wypełnienie poniższego formularza.</p>
   </div>
-    <form id="form-container" method="post" action="/page3">
-      <div class="form-group mb-3">
-        <label for="imie">Imię <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="imie" name="imie" required maxlength="15">
-      </div>
-      <div class="form-group mb-3">
-        <label for="nazwisko">Nazwisko <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="nazwisko" name="nazwisko" required maxlength="40">
-      </div>
-      <div class="form-group mb-3">
-        <label for="kierunek">Kierunek studiów <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="kierunek" name="kierunek" required>
-      </div>
-      <div class="form-group mb-3">
-        <label for="uczelnia">Uczelnia <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="uczelnia" name="uczelnia" required>
-      </div>
-      <div class="form-group mb-3">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" >
-      </div>
-      <div class="form-group mb-3">
-        <label for="plec">Płeć <span class="text-danger">*</span></label>
-        <select class="form-control" id="plec" name="plec" required>
-          <option value="">Wybierz</option>
-          <option value="Mężczyzna">Mężczyzna</option>
-          <option value="Kobieta">Kobieta</option>
-          <option value="Inna">Inna</option>
-        </select>
-      </div>
-      <div class="form-group mb-3">
-        <label for="wiek">Wiek<span class="text-danger">*</span></label>
-        <input type="number" class="form-control" id="wiek" name="wiek" min="16" max="90"onmousewheel="return false;" required>
-      </div>
-      <button tm-5  class="btn btn-primary mb-3" type="submit" onclick="window.location.href='/page4'">Dalej </button>
-    </form>
+  <form method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.first_name.label }} {{ form.first_name(size=20, class="form-control") }}
+        {% for error in form.first_name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.last_name.label }} {{ form.last_name(size=30, class="form-control") }}
+        {% for error in form.last_name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.study_program.label }} {{ form.study_program(class="form-control") }}
+        {% for error in form.study_program.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.university.label }} {{ form.university(class="form-control") }}
+        {% for error in form.university.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.email.label }} {{ form.email(size=30, class="form-control") }}
+        {% for error in form.email.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.gender.label }} {{ form.gender(class="form-control") }}
+        {% for error in form.gender.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.age.label }} {{ form.age(class="form-control") }}
+        {% for error in form.age.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+  
   </div>
 
   
