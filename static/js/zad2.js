@@ -20,12 +20,12 @@
 
   // Tworzymy elementy z odpowiedziami jednokrotnego wyboru
   const answers = [
-    "Odpowiedź 1",
-    "Odpowiedź 2",
-    "Odpowiedź 3",
-    "Odpowiedź 4",
-    "Odpowiedź 5",
-    "Odpowiedź 6",
+    " Odpowiedź 1",
+    " Odpowiedź 2",
+    " Odpowiedź 3",
+    " Odpowiedź 4",
+    " Odpowiedź 5",
+    " Odpowiedź 6",
   ];
   const odp = [5,3,1,4];
   const odp_pop = odp[randomNumber - 1];

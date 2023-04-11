@@ -1,3 +1,10 @@
+let czas;
+let timeSpent;
+// Zapisywanie wybranej odpowiedzi do zmiennej selected
+var selectedAnswer;
+function startTimer() {
+  czas = performance.now();
+}
 // Tresci odpowiedzi
 var answers = [
     " herbatę",
@@ -8,7 +15,7 @@ var answers = [
 ];
 
 // Tworzenie pytania wraz z odpowiedziami radiowymi
-var question = "Co wypiła do śniadania osoba opowiadająca o swoim dniu na poprzednich stronach?"<br>";
+var question = "Co wypiła do śniadania osoba opowiadająca o swoim dniu na poprzednich stronach?"+ "<br>";
 for (var i = 0; i < answers.length; i++) {
     question += "<input type='radio' name='answer' value='" + answers[i] + "'>" + answers[i] + "<br>";
 }
@@ -16,13 +23,6 @@ for (var i = 0; i < answers.length; i++) {
 // Wyświetlanie pytania i odpowiedzi na stronie
 document.getElementById("question-container").innerHTML = question;
 
-let czas;
-let timeSpent;
-// Zapisywanie wybranej odpowiedzi do zmiennej selected
-var selectedAnswer;
-function startTimer() {
-  czas = performance.now();
-}
 
 function stopTimer() {
   const endTime = performance.now();
