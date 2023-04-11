@@ -48,7 +48,8 @@
   const formContainer = document.getElementById("form-container");
   const answerSection = document.createElement("div");
   answerSection.appendChild(answerList);
-  formContainer.insertBefore(answerSection, formContainer.lastChild); // Dodajemy elementy z odpowiedziami przed przyciskiem "Click here"
+  answerSection.classList.add("row")
+  formContainer.insertBefore(answerSection, formContainer.lastElementChild); // Dodajemy elementy z odpowiedziami przed przyciskiem "Click here"
   let czas;
   let selectedAnswer;
   let timeSpent; // zmienna zdefiniowana na początku skryptu
