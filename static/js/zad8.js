@@ -30,7 +30,7 @@ function stopTimer() {
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
-  let correct = answers[1];
+  let correct = answers[0];
 
   $.ajax({
     url: "/page20",
