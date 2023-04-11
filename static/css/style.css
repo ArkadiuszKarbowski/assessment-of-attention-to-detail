@@ -22,4 +22,28 @@ ul {
 .incorrect {
   background-color: lightcoral;
 }
+.footer {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	
+  }
 
+  @media (max-width: 768px) {
+	.footer {
+	  position: relative;
+	}
+  }
+
+  .form-group {
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+  }
+
+  .btn {
+	font-size: 18px; /* ustawia wielkość czcionki na 18 pikseli */
+	padding: 10px 20px; /* ustawia wewnętrzne wypełnienie przycisku na 10 pikseli na górze/dole i 20 pikseli po bokach */
+	margin-top: 20px; 
+	margin-bottom: 10px; 
+  }

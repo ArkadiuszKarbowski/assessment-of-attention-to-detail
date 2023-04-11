@@ -15,9 +15,9 @@ def create_app():
 
   #coś zmienne srodowiskowe mi nie działają więc
   #to lokalnie:
-  #app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://attention_to_detail_db_user:DFykAjgLeZjqvCuL5mjtlk9nFXoy1GMf@dpgcgo5pn5269v5rja7nbug-a.frankfurt-postgres.render.com/attention_to_detail_db"
+  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://attention_to_detail_db_user:DFykAjgLeZjqvCuL5mjtlk9nFXoy1GMf@dpgcgo5pn5269v5rja7nbug-a.frankfurt-postgres.render.com/attention_to_detail_db"
   #a to na renderze:
-  app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
+  #app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
 
   app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
