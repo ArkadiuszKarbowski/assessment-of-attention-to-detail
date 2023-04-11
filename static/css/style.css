@@ -47,3 +47,7 @@ ul {
 	margin-top: 20px; 
 	margin-bottom: 10px; 
   }
+
+  .image-container {
+	width: 100%; /* Ustaw szerokość na 100% */
+  }
