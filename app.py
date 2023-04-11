@@ -219,6 +219,24 @@ def create_app():
   @app.route('/page19')
   def page19():
     return render_template('zad8.html') 
+  @app.route('/page20', methods=['GET', 'POST'])
+  def page20():
+    try:
+        if request.method == 'POST':
+          selected_answer = request.form['sel']
+          time_taken = request.form['timetak']
+          correct_answer = request.form['correct']
+        # Create a new TestResult object and add it to the database
+        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=8)
+        db.session.add(new_result)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page21')
+  @app.route('/page21')
+  def page21():
+    return render_template('zad9.html') 
   if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug=True)
 

@@ -33,12 +33,12 @@ function stopTimer() {
   let correct = answers[1];
 
   $.ajax({
-    url: "/page20",
+    url: "/page12",
     type: "POST",
     data: { ver: x, correct: correct, timetak: timeSpent, sel: selectedAnswer },
     success: function(response) {
       console.log(response);
-      window.location.href = "/page21";
+      window.location.href = "/page13";
     },
     error: function(xhr, status, error) {
       console.log(xhr.responseText);

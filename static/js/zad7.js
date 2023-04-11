@@ -13,7 +13,6 @@ function handleClick(square) {
     clickedSquares.push(square); // dodanie klikniętego kwadratu do listy klikniętych
     document.getElementById(square).style.visibility = 'hidden';
     selectedanswer += square.replace("square", ""); // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
-    console.log(selectedanswer);
   }
 }
 
