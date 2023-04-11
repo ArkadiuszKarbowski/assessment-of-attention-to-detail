@@ -1,23 +1,23 @@
-const animalSounds = ["dog1", "dog2", "dog3", "dog4"];
-let index = 0;
+let czas;
+let timeSpent;
 let selectedanswer; 
-let sound;
-let audio;
+let audio= new Audio(`static/animals.mp3`);
+let isPlaying = false;
+
+function startTimer() {
+  czas = performance.now();
+}
 
 function playAnimalSounds() {
-  sound = animalSounds[index];
-  audio = new Audio(`static/${sound}.mp3`);
-  audio.loop = true;
-  audio.onended = function() {
-  setTimeout(function() {
-    index++;
-    if (index >= animalSounds.length) {
-      index = 0;
-    }
-    playAnimalSounds();
-  }, audio.duration * 1000 + 1000); // opóźnienie równoważne długości dźwięku + 1 sekunda
-  };
-  audio.play();
+  if (!isPlaying) {
+    isPlaying = true;
+    audio.currentTime = 0;
+    audio.play();
+    setTimeout(function() {
+      isPlaying = false;
+      playAnimalSounds();
+    }, audio.duration * 1000 + 2000); // opóźnienie równoważne długości dźwięku + 2 sekundy
+  }
 }
 
 function getSelectedAnswer() {
@@ -27,12 +27,6 @@ function getSelectedAnswer() {
 }
 
 playAnimalSounds();
-let czas;
-let timeSpent;
-
-function startTimer() {
-  czas = performance.now();
-}
 
 function stopTimer() {
   const endTime = performance.now();

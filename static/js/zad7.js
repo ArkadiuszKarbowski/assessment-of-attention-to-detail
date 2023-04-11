@@ -1,17 +1,22 @@
-const leftImageSrc = 'static/trojkat.png';
-const leftColumn = document.getElementById("left");
-// Tworzymy element obrazka w lewej kolumnie
-const leftImage = document.createElement("img");
-leftImage.src = leftImageSrc;
-leftColumn.appendChild(leftImage);
+// inicjalizacja zmiennych
+		var selectedanswer = "";
+		var clickedSquares = [];
+    let czas;
+    let timeSpent; // zmienna zdefiniowana na początku skryptu
 
-let czas;
-let selectedAnswer;
-let timeSpent; // zmienna zdefiniowana na początku skryptu
+    function startTimer() {
+     czas = performance.now();
+    }
+		// dodanie nasłuchiwania kliknięć na kwadratach
+		document.querySelectorAll(".square").forEach(function(square) {
+			square.addEventListener("click", function() {
+				if (!clickedSquares.includes(this)) { // sprawdzenie, czy kwadrat nie został już kliknięty
+					clickedSquares.push(this); // dodanie klikniętego kwadratu do listy klikniętych
+					selectedanswer += clickedSquares.length; // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
+					}
+			});
+		});
 
-function startTimer() {
-  czas = performance.now();
-}
 
 function stopTimer() {
   const endTime = performance.now();
@@ -19,12 +24,12 @@ function stopTimer() {
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
   const selectedAnswer = document.getElementById("odp").value;
   $.ajax({
-      url: "/page14",
+      url: "/page18",
       type: "POST",
       data: {timetak: timeSpent, sel: selectedAnswer },
       success: function(response) {
         console.log(response);
-        window.location.href = "/page15";
+        window.location.href = "/page19";
       },
       error: function(xhr, status, error) {
         console.log(xhr.responseText);
