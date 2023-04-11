@@ -10,5 +10,5 @@ class AnkietaForm(FlaskForm):
     university  = StringField('Uczelnia', validators=[DataRequired()])
     email = StringField('Email', validators=[Optional(), Email()])
     gender  = SelectField('Płeć', choices=[('', 'Wybierz'), ('Mężczyzna', 'Mężczyzna'), ('Kobieta', 'Kobieta'), ('Inna', 'Inna')], validators=[DataRequired()])
-    age = IntegerField('Wiek', validators=[InputRequired(), NumberRange(min=16, max=60, message='Wiek musi być w zakresie od 16 do 60'),], default=16)
+    age = IntegerField('Wiek', validators=[InputRequired(), NumberRange(min=16, max=60, message='Wiek musi być w zakresie od 16 do 60'),])
     submit = SubmitField('Wyślij')
