@@ -9,12 +9,12 @@ function startTimer() {
 }
 
 // dodanie nasłuchiwania kliknięć na kwadratach
-document.querySelectorAll(".square").forEach(function(square) {
-  square.addEventListener("click", function() {
-    if (!clickedSquares.includes(this)) { // sprawdzenie, czy kwadrat nie został już kliknięty
-      clickedSquares.push(this); // dodanie klikniętego kwadratu do listy klikniętych
-      selectedanswer += clickedSquares.indexOf(this) + 1; // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
-      this.style.backgroundImage = "none"; 
+document.querySelectorAll(".square img").forEach(function(img) {
+  img.addEventListener("click", function() {
+    if (!clickedSquares.includes(this.parentElement)) { // sprawdzenie, czy kwadrat nie został już kliknięty
+      clickedSquares.push(this.parentElement); // dodanie klikniętego kwadratu do listy klikniętych
+      selectedanswer += clickedSquares.indexOf(this.parentElement) + 1; // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
+      this.parentElement.style.backgroundImage = "none"; 
     }
   });
 });
