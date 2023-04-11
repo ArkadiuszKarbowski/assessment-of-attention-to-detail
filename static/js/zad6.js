@@ -16,7 +16,7 @@ function playAnimalSounds() {
     setTimeout(function() {
       isPlaying = false;
       playAnimalSounds();
-    }, audio.duration * 1000 + 3000); // opóźnienie równoważne długości dźwięku + 3 sekundy
+    }, audio.duration * 1000 + 2000); // opóźnienie równoważne długości dźwięku + 2 sekundy
   }
 }
 
