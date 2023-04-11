@@ -1,9 +1,11 @@
 const leftImageSrc = 'static/trojkat.png';
-const leftColumn = document.getElementById("left");
+const leftColumn = document.getElementById("trng");
 // Tworzymy element obrazka w lewej kolumnie
 const leftImage = document.createElement("img");
 leftImage.src = leftImageSrc;
+leftColumn.classList.add('justify-content-center');
 leftColumn.appendChild(leftImage);
+
 
 let czas;
 let selectedAnswer;
