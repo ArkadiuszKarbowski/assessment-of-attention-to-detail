@@ -1,4 +1,7 @@
-// inicjalizacja zmiennych
+Oto poprawiony kod JavaScript, który usuwa obrazy po kliknięciu i zapisuje ich id do zmiennej selectedanswer:
+
+js
+Copy code
 var selectedanswer = "";
 var clickedSquares = [];
 let czas;
@@ -8,16 +11,22 @@ function startTimer() {
   czas = performance.now();
 }
 
-// dodanie nasłuchiwania kliknięć na kwadratach
-document.querySelectorAll(".square img").forEach(function(img) {
-  img.addEventListener("click", function() {
-    if (!clickedSquares.includes(this.parentElement)) { // sprawdzenie, czy kwadrat nie został już kliknięty
-      clickedSquares.push(this.parentElement); // dodanie klikniętego kwadratu do listy klikniętych
-      selectedanswer += clickedSquares.indexOf(this.parentElement) + 1; // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
-      this.parentElement.style.backgroundImage = "none"; 
-    }
+// funkcja obsługująca kliknięcie w kwadrat
+function handleClick(square) {
+  if (!clickedSquares.includes(square)) { // sprawdzenie, czy kwadrat nie został już kliknięty
+    clickedSquares.push(square); // dodanie klikniętego kwadratu do listy klikniętych
+    selectedanswer += square.id.replace("square", ""); // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
+    square.style.backgroundImage = "none"; // usunięcie obrazka
+  }
+}
+
+// dodanie obsługi kliknięć na kwadratach
+document.querySelectorAll(".square").forEach(function(square) {
+  square.addEventListener("click", function() {
+    handleClick(square);
   });
 });
+
 
 function stopTimer() {
   const endTime = performance.now();
