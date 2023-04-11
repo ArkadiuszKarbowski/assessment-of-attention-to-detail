@@ -11,8 +11,9 @@ function startTimer() {
 function handleClick(square) {
   if (!clickedSquares.includes(square)) { // sprawdzenie, czy kwadrat nie został już kliknięty
     clickedSquares.push(square); // dodanie klikniętego kwadratu do listy klikniętych
+    square.style.visibility = 'hidden';
     selectedanswer += square.id.replace("square", ""); // dodanie numeru klikniętego kwadratu do zapisanej odpowiedzi
-    square.style.backgroundImage = "none"; // usunięcie obrazka
+    console.log(selectedanswer);
   }
 }
 
