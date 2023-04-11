@@ -35,7 +35,7 @@ function stopTimer() {
   $.ajax({
     url: "/page20",
     type: "POST",
-    data: { ver: x, correct: correct, timetak: timeSpent, sel: selectedAnswer },
+    data: {correct: correct, timetak: timeSpent, sel: selectedAnswer },
     success: function(response) {
       console.log(response);
       window.location.href = "/page21";
