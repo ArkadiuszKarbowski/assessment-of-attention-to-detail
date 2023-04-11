@@ -64,6 +64,7 @@ for (let i = 0; i < hasla.length; i++) {
 const formContainer = document.getElementById('form-container');
 const leftColumn = document.getElementById('left');
 leftColumn.appendChild(tabela);
+tabela.classList.add('mx-auto');
 leftColumn.appendChild(document.createElement('br')); // dodanie przejścia do nowej linii między tabelą a listą checkboxów
 const rightColumn = document.getElementById('right');
 rightColumn.appendChild(document.createElement('h2')).innerText = 'Wybierz hasła, których odbicie lustrzane jest błędne';
