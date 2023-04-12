@@ -23,6 +23,12 @@ def create_app():
 
   db.init_app(app)
   
+  @app.before_request
+  def block_firefox():
+    user_agent = request.headers.get('User-Agent')
+    if 'Firefox' in user_agent:
+        return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
+
   @app.route("/")
   def index():
     return render_template('home.html')
