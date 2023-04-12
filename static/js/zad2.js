@@ -47,8 +47,8 @@
   // Dodajemy elementy z odpowiedziami do formularza
   const formContainer = document.getElementById("form-container");
   const answerSection = document.createElement("div");
-  answerSection.appendChild(answerList);
   answerSection.classList.add("row")
+  answerSection.appendChild(answerList);
   formContainer.insertBefore(answerSection, formContainer.lastElementChild); // Dodajemy elementy z odpowiedziami przed przyciskiem "Click here"
   let czas;
   let selectedAnswer;
