@@ -73,7 +73,7 @@
         console.log(response);
         window.location.href = "/page8";
       },
-      error: function(xhr, status, error) {
+      error: function(xhr) {
         console.log(xhr.responseText);
       }
     });
