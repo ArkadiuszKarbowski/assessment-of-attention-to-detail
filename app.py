@@ -56,17 +56,13 @@ def create_app():
   @app.route('/page3', methods=['GET', 'POST'])
   def page3():
     if request.method == 'POST':
-      first_name = request.form['imie']
-      last_name = request.form['nazwisko']
       study_field = request.form['kierunek']
       university = request.form['uczelnia']
       email = request.form['email']
       gender = request.form['plec']
       age = request.form['wiek']
 
-      new_user = Users(first_name=first_name,
-                      last_name=last_name,
-                      study_field=study_field,
+      new_user = Users(study_field=study_field,
                       university=university,
                       email=email,
                       gender=gender,
