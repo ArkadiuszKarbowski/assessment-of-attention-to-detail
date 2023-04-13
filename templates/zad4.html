@@ -15,9 +15,9 @@
 </style>
 <script type="text/javascript">
     var isPlaying = false;
+	var audio = new Audio('static/muzyka.mp4');
 		function playAudio() {
       if (!isPlaying) {
-        var audio = new Audio('static/muzyka.mp4');
         audio.play();
         isPlaying = true;
         audio.onended = function() {
