@@ -19,7 +19,7 @@
 	function playAudio() {
 	if (!isPlaying){
 		isPlaying = true;
-		var audioElement = document.createElement('audio');
+		var audioElement = new Audio()
 		audioElement.src = 'static/muzyka.mp4'; 
 		audioElement.type = 'audio/mpeg';
 	
