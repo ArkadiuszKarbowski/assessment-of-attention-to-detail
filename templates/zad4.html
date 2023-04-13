@@ -14,12 +14,25 @@
 	}
 </style>
 <script>
+	var isPlaying = false;
+
 	function playAudio() {
-	  var audioElement = document.createElement('audio');
-	  audioElement.src = 'static/muzyka.mp4'; 
-	  audioElement.play(); 
+	if (!isPlaying){
+		isPlaying = true;
+		var audioElement = document.createElement('audio');
+		audioElement.src = 'static/muzyka.mp4'; 
+		audioElement.type = 'audio/mpeg';
+	
+		
+		audioElement.play(); 
+		audioElement.addEventListener('ended', unlockBTN)
+	}}
+
+	function unlockBTN(){
+		document.getElementById("dalejBtn").disabled = false;
+        document.getElementById("odsluchajBtn").disabled = true;
 	}
-  
+
 	window.onload = function() {
 	  var btn = document.getElementById('odsluchajBtn');
 	  btn.addEventListener('click', playAudio);
@@ -30,7 +43,7 @@
 {% block body %}
 <form id="form-container" method="post" action="/page9">
 	<h2>Odsłuchaj plik dźwiękowy potrzebny do kolejnego zadania: </h2>
-	<button class="btn btn-primary mb-3" type="button" id="odsluchajBtn">Odsłuchaj </button>
+	<button class="btn btn-primary mb-3" type="button" value="Play" id="odsluchajBtn">Odsłuchaj </button>
 <button class="btn btn-primary mb-3" type="button" id="dalejBtn" disabled="true" onclick="window.location.href='/page11'">Dalej </button>
 </form>
 {% endblock %}
