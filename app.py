@@ -36,8 +36,9 @@ def endpoint_na_serwerze():
         app.logger.info('Processing request')
         data = request.get_json()
         app.logger.info('Received data: %s', data)
-        selected_answer = data.get('sum')
-        time_taken = data.get('timetak')
+        selected_answer = data('sum')
+        time_taken = data('timetak')
+        app.logger.info(request.data)
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
         db.session.add(new_result)
