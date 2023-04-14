@@ -2,12 +2,13 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 from models.myform import AnkietaForm
+from flask_json import FlaskJSON
 
 db = SQLAlchemy()
 
 def create_app():
   app = Flask(__name__)
-
+  json = FlaskJSON(app)
   app.secret_key = 'XHAEu7TvJgo5aplAGen57WMQNvvMOPRZ'
 
   from models.users import Users
@@ -19,7 +20,7 @@ def create_app():
   #a to na renderze:
   app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
 
-  #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
   db.init_app(app)
   
@@ -83,20 +84,15 @@ def create_app():
   def page4():
     return render_template('spot-typo.html')
     
-  @app.route('/page5', methods=['GET', 'POST'])
-  def page5():
-    try:
-        if request.method == 'POST':
-          selected_answer = request.form['sum']
-          time_taken = request.form['timetak']
-        # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
-        db.session.add(new_result)
-        db.session.commit()
-    except Exception as e:
-        db.session.rollback()
-        print(str(e))
+  app.route('/page5', methods=['POST'])
+  def handle_page5():
+    data = request.get_json()  # Odczytaj dane JSON z ciała żądania
+    timetak = data.get('timetak')  # Odczytaj wartość pola 'timetak' z danych JSON
+    suma = data.get('sum')  # Odczytaj wartość pola 'sum' z danych JSON
+
+    response_data = {'status': 'success', 'message': 'Dane odebrane poprawnie'}
     return redirect('/page6')
+
     
   @app.route('/page6')
   def page6():
@@ -106,10 +102,10 @@ def create_app():
   def page7():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          correct_answer = request.form['correct']
-          task_version = request.form['ver']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sel']
+          correct_answer = request.json['correct']
+          task_version = request.json['ver']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=2)
         db.session.add(new_result)
@@ -127,9 +123,9 @@ def create_app():
   def page9():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          correct_answer = request.form['correct']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sel']
+          correct_answer = request.json['correct']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
         db.session.add(new_result)
@@ -149,10 +145,10 @@ def create_app():
   def page12():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          correct_answer = request.form['correct']
-          time_taken = request.form['timetak']
-          task_version = request.form['ver']
+          selected_answer = request.json['sel']
+          correct_answer = request.json['correct']
+          time_taken = request.json['timetak']
+          task_version = request.json['ver']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=task_version, time_taken=time_taken, task_number=4)
         db.session.add(new_result)
@@ -168,8 +164,8 @@ def create_app():
   def page14():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sel']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=13, task_version=1, time_taken=time_taken, task_number=5)
         db.session.add(new_result)
@@ -186,8 +182,8 @@ def create_app():
   def page16():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sel']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=17, task_version=1, time_taken=time_taken, task_number=6)
         db.session.add(new_result)
@@ -203,8 +199,8 @@ def create_app():
   def page18():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sel']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=3241, task_version=1, time_taken=time_taken, task_number=7)
         db.session.add(new_result)
@@ -220,9 +216,9 @@ def create_app():
   def page20():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sel']
-          time_taken = request.form['timetak']
-          correct_answer = request.form['correct']
+          selected_answer = request.json['sel']
+          time_taken = request.json['timetak']
+          correct_answer = request.json['correct']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=8)
         db.session.add(new_result)
@@ -238,8 +234,8 @@ def create_app():
   def page22():
     try:
         if request.method == 'POST':
-          selected_answer = request.form['sum']
-          time_taken = request.form['timetak']
+          selected_answer = request.json['sum']
+          time_taken = request.json['timetak']
         # Create a new TestResult object and add it to the database
         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=9)
         db.session.add(new_result)

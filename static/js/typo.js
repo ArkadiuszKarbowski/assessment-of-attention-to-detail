@@ -26,7 +26,7 @@ for (let i = 0; i < leftWords.length; i++) {
     span.addEventListener("click", () => {
       console.log("Kliknięto na słowo");
       if (rightWords[i] === leftWords[i]) {
-        // Jeśli tak, to ustawiamy kolor na zielony
+        // Jeśli tak, to ustawiamy kolor na zielony 
         span.style.color = "green";
       } else {
         span.style.backgroundColor = "red";
@@ -49,18 +49,14 @@ function stopTimer() {
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-  $.ajax({
-    url: "/page5",
-    type: "POST",
-    data: { timetak: timeSpent, sum: suma},
-    async:false,
-    
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page6";
+  fetch("/page5", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     },
-    error: function(xhr) {
-      console.log(xhr.responseText);
-    }
-  });
+    body: JSON.stringify({ timetak: timeSpent, sum: suma }),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+
 }
