@@ -53,7 +53,7 @@ function stopTimer() {
     url: "/page5",
     type: "POST",
     data: { timetak: timeSpent, sum: suma},
-    async:false,
+
     
     success: function(response) {
       console.log(response);
