@@ -2,13 +2,13 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 from models.myform import AnkietaForm
-from flask_json import FlaskJSON
+import json
 
 db = SQLAlchemy()
 
 def create_app():
   app = Flask(__name__)
-  json = FlaskJSON(app)
+  #flaskjson = FlaskJSON(app)
   app.secret_key = 'XHAEu7TvJgo5aplAGen57WMQNvvMOPRZ'
 
   from models.users import Users
@@ -29,6 +29,22 @@ def create_app():
    # user_agent = request.headers.get('User-Agent')
     #if 'Firefox' in user_agent:
      #   return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
+
+  @app.route('/endpoint-na-serwerze', methods=['POST'])
+  def endpoint_na_serwerze():
+    try:
+      data = request.get_json()
+      selected_answer = data['sum']
+      time_taken = data['timetak']
+        # Create a new TestResult object and add it to the database
+      new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
+      db.session.add(new_result)
+      db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+    return redirect('/page6')
+
 
   @app.route("/")
   def index():
@@ -84,17 +100,23 @@ def create_app():
   def page4():
     return render_template('spot-typo.html')
     
-  app.route('/page5', methods=['POST'])
+  @app.route('/page5', methods=['POST'])
   def handle_page5():
-    data = request.get_json()  # Odczytaj dane JSON z ciała żądania
-    timetak = data.get('timetak')  # Odczytaj wartość pola 'timetak' z danych JSON
-    suma = data.get('sum')  # Odczytaj wartość pola 'sum' z danych JSON
-
-    response_data = {'status': 'success', 'message': 'Dane odebrane poprawnie'}
+    try:
+      data = request.get_json()
+      selected_answer = data['sum']
+      time_taken = data['timetak']
+        # Create a new TestResult object and add it to the database
+      new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
+      db.session.add(new_result)
+      db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
     return redirect('/page6')
 
     
-  @app.route('/page6')
+  @app.route('/page6', methods=['GET', 'POST'])
   def page6():
     return render_template('zad2.html')
 

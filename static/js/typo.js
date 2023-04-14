@@ -49,14 +49,35 @@ function stopTimer() {
   const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-  fetch("/page5", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ timetak: timeSpent, sum: suma }),
-  })
-  .then(response => response.json())
-  .then(data => console.log(data))
+}
 
+function nxtBtn(){
+  stopTimer();
+  send();
+}
+function send(){
+  
+  const dataToSend = {
+    sum: suma,
+    timetak: timeSpent
+  };
+  
+  // Wysyłamy żądanie POST na serwer
+  fetch('/endpoint-na-serwerze', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataToSend)
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Dane przesłane na serwer.');
+    } else {
+      console.error('Błąd podczas przesyłania danych na serwer.');
+    }
+  })
+  .catch(error => {
+    console.error('Błąd podczas przesyłania danych na serwer:', error);
+  });
 }
