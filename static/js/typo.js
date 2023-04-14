@@ -40,28 +40,28 @@ for (let i = 0; i < leftWords.length; i++) {
 }
 let czas;
 let timeSpent;
-
 function startTimer() {
   czas = performance.now();
 }
 
 function stopTimer() {
   const endTime = performance.now();
-  timeSpent = (endTime - czas) / 1000; // Zapisujemy czas do zmiennej "timeSpent"
+  const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+
 }
 
-function nxtBtn() {
+function nxtBtn(){
   stopTimer();
   send();
 }
-
-function send() {
+function send(){
+  
   const dataToSend = {
     sum: suma,
-    timetak: timeSpent.toFixed(2) // Zaokrąglamy czas do 2 miejsc po przecinku
+    timetak: timeSpent.toFixed(2)
   };
-
+  
   // Wysyłamy żądanie POST na serwer
   fetch('/endpoint-na-serwerze', {
     method: 'POST',
@@ -70,14 +70,14 @@ function send() {
     },
     body: JSON.stringify(dataToSend)
   })
-    .then(response => {
-      if (response.ok) {
-        console.log('Dane przesłane na serwer.');
-      } else {
-        console.error('Błąd podczas przesyłania danych na serwer.');
-      }
-    })
-    .catch(error => {
-      console.error('Błąd podczas przesyłania danych na serwer:', error);
-    });
+  .then(response => {
+    if (response.ok) {
+      console.log('Dane przesłane na serwer.');
+    } else {
+      console.error('Błąd podczas przesyłania danych na serwer.');
+    }
+  })
+  .catch(error => {
+    console.error('Błąd podczas przesyłania danych na serwer:', error);
+  });
 }
