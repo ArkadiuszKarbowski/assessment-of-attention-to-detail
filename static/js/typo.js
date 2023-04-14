@@ -2,6 +2,8 @@
 const leftColumn = document.querySelector("#left p");
 const rightColumn = document.querySelector("#right p");
 let suma = 0;
+let czas;
+let timeSpent = 0;
 // Dzielimy zawartość paragrafów na słowa
 const leftWords = leftColumn.textContent
   .trim()
@@ -38,15 +40,14 @@ for (let i = 0; i < leftWords.length; i++) {
     leftColumn.appendChild(span);
   }
 }
-let czas;
-let timeSpent;
+
 function startTimer() {
   czas = performance.now();
 }
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
 }
