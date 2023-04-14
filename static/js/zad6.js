@@ -1,8 +1,8 @@
 let czas;
 let timeSpent;
 let selectedanswer; 
-let audio= new Audio(`static/animals.mp3`);
 let isPlaying = false;
+let audio =  document.getElementById('Audio'); 
 
 function startTimer() {
   czas = performance.now();

@@ -2,7 +2,12 @@
 {% block head %}
 <script>
 	window.onload = function() {
-		startTimer();
+		startTimer(); 
+
+		audio.addEventListener('canplaythrough', function() {
+  
+		audio.muted = false;
+  });
 	};
 </script>
 <style>
@@ -35,7 +40,9 @@
 	</div>
 
 	<div class="row mt-3"><button class="btn btn-primary mb-3" type="submit" onclick="stopTimer()"'>Dalej </button></div>
-
+	<audio autoplay muted id="Audio">
+		<source src="static/animals.mp3" type="audio/mpeg" >
+	</audio>
 </form>
 
 <script src="static/js/zad6.js"></script>
