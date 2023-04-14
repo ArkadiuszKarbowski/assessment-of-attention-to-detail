@@ -19,7 +19,7 @@ def create_app():
   #a to na renderze:
   app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
 
-  #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
   db.init_app(app)
   
