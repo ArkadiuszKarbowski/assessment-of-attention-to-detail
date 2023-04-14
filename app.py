@@ -30,18 +30,22 @@ def create_app():
     #if 'Firefox' in user_agent:
      #   return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
 
-  @app.route('/endpoint-na-serwerze', methods=['POST'])
-  def endpoint_na_serwerze():
+ @app.route('/endpoint-na-serwerze', methods=['POST'])
+def endpoint_na_serwerze():
     try:
-      data = request.get_json()
-      selected_answer = data.get('sum')
-      time_taken = data.get('timetak')
+        app.logger.info('Processing request')
+        data = request.get_json()
+        app.logger.info('Received data: %s', data)
+        selected_answer = data.get('sum')
+        time_taken = data.get('timetak')
         # Create a new TestResult object and add it to the database
-      new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
-      db.session.add(new_result)
-      db.session.commit()
+        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
+        db.session.add(new_result)
+        db.session.commit()
+        app.logger.info('Saved new result to the database')
     except Exception as e:
         db.session.rollback()
+        app.logger.error('Error processing request: %s', str(e))
         print(str(e))
     return redirect('/page6')
 
