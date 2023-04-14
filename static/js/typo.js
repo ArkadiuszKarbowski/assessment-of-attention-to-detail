@@ -54,6 +54,7 @@ function stopTimer() {
     type: "POST",
     data: { timetak: timeSpent, sum: suma},
     async:false,
+    
     success: function(response) {
       console.log(response);
       window.location.href = "/page6";

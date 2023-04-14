@@ -1,0 +1,23 @@
+fetch('/dodaj_czas_reakcji', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                czas: String(czas)
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+
+
+w app.py:
+
+@app.route('/dodaj_czas_reakcji', methods=['POST'])
+def add_czas_reakcji():
+    data = request.get_json()
+    czas = data['czas']
+    data = Data.query.order_by(Data.id.desc()).first()
+    data.czas = czas
+    db.session.commit()
+    return jsonify({'success': True})
