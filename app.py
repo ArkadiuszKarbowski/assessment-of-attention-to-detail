@@ -1,22 +1,34 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-import os
+from os import environ
 from models.myform import AnkietaForm
 import json
 
 db = SQLAlchemy()
 
 def create_app():
+
   app = Flask(__name__)
+  
   #flaskjson = FlaskJSON(app)
   app.secret_key = 'XHAEu7TvJgo5aplAGen57WMQNvvMOPRZ'
 
   from models.users import Users
   from models.task_results import TestResult
 
+  DB_USER = environ.get('DB_USER')
+  DB_PASSWORD = environ.get('DB_PASSWORD')
+  DB_HOST = environ.get('DB_HOST') 
+  DB_PORT = environ.get('DB_PORT')
+  DB_NAME = environ.get('DB_NAME')
+
+  SQLALCHEMY_DATABASE_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
   #coś zmienne srodowiskowe mi nie działają więc
   #to lokalnie:
-  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://attention_to_detail_db_user:DFykAjgLeZjqvCuL5mjtlk9nFXoy1GMf@dpgcgo5pn5269v5rja7nbug-a.frankfurt-postgres.render.com/attention_to_detail_db"
+
+  app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+
   #a to na renderze:
   #pp.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
 
@@ -30,25 +42,25 @@ def create_app():
     #if 'Firefox' in user_agent:
      #   return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
 
-  @app.route('/endpoint-na-serwerze', methods=['POST'])
-  def endpoint_na_serwerze():
-    try:
-        app.logger.info('Processing request')
-        data = request.get_json()
-        app.logger.info('Received data: %s', data)
-        selected_answer = data.get('sum')
-        time_taken = data.get('timetak')
-        app.logger.info(request.data)
-        # Create a new TestResult object and add it to the database
-        new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
-        db.session.add(new_result)
-        db.session.commit()
-        app.logger.info('Saved new result to the database')
-    except Exception as e:
-        db.session.rollback()
-        app.logger.error('Error processing request: %s', str(e))
-        print(str(e))
-    return redirect('/page6')
+#   @app.route('/endpoint-na-serwerze', methods=['POST'])
+#   def endpoint_na_serwerze():
+#     try:
+#         app.logger.info('Processing request')
+#         data = request.get_json()
+#         app.logger.info('Received data: %s', data)
+#         selected_answer = data.get('sum')
+#         time_taken = data.get('timetak')
+#         app.logger.info(request.data)
+#         # Create a new TestResult object and add it to the database
+#         new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
+#         db.session.add(new_result)
+#         db.session.commit()
+#         app.logger.info('Saved new result to the database')
+#     except Exception as e:
+#         db.session.rollback()
+#         app.logger.error('Error processing request: %s', str(e))
+#         print(str(e))
+#     return redirect('/page6')
 
 
   @app.route("/")
@@ -275,6 +287,6 @@ def create_app():
   def page23():
     return render_template('end.html')
   if __name__ == "__main__":
-    app.run(host= '0.0.0.0', debug=True)
+    app.run(host= '0.0.0.0', debug=True, port=int(environ.get("PORT",8080)))
 
   return app
