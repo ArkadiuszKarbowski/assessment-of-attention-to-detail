@@ -26,7 +26,9 @@ def create_app():
 
   #coś zmienne srodowiskowe mi nie działają więc
   #to lokalnie:
+
   app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+
   #a to na renderze:
   #pp.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('URL_DB')
 

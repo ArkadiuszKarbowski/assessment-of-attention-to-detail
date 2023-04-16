@@ -60,7 +60,7 @@ function send(){
   
   const dataToSend = {
     sum: suma,
-    timetak: timeSpent.toFixed(2)
+    timetak: "10"
   };
   
   // Wysyłamy żądanie POST na serwer
