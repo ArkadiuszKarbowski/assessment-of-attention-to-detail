@@ -254,6 +254,6 @@ def create_app():
   def page23():
     return render_template('end.html')
   if __name__ == "__main__":
-    app.run(host= '0.0.0.0', debug=True)
+    app.run(host= '0.0.0.0', debug=True, port=int(os.environ.get("PORT",8080)))
 
   return app
