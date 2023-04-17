@@ -2,8 +2,6 @@
 const leftColumn = document.querySelector("#left p");
 const rightColumn = document.querySelector("#right p");
 let suma = 0;
-let czas;
-let timeSpent = 0;
 // Dzielimy zawartość paragrafów na słowa
 const leftWords = leftColumn.textContent
   .trim()
@@ -28,7 +26,7 @@ for (let i = 0; i < leftWords.length; i++) {
     span.addEventListener("click", () => {
       console.log("Kliknięto na słowo");
       if (rightWords[i] === leftWords[i]) {
-        // Jeśli tak, to ustawiamy kolor na zielony 
+        // Jeśli tak, to ustawiamy kolor na zielony
         span.style.color = "green";
       } else {
         span.style.backgroundColor = "red";
@@ -40,45 +38,29 @@ for (let i = 0; i < leftWords.length; i++) {
     leftColumn.appendChild(span);
   }
 }
-
+let czas;
+let timeSpent;
 function startTimer() {
   czas = performance.now();
 }
 
 function stopTimer() {
   const endTime = performance.now();
-  timeSpent = (endTime - czas) / 1000;
+  const timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-}
+  $.ajax({
+    url: "/page5",
+    type: "POST",
+    data: { timetak: timeSpent, sum: suma},
 
-function nxtBtn(){
-  stopTimer();
-  send();
-}
-function send(){
-  
-  const dataToSend = {
-    sum: suma,
-    timetak: "10"
-  };
-  
-  // Wysyłamy żądanie POST na serwer
-  fetch('/endpoint-na-serwerze', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
+    
+    success: function(response) {
+      console.log(response);
+      window.location.href = "/page6";
     },
-    body: JSON.stringify(dataToSend)
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Dane przesłane na serwer.');
-    } else {
-      console.error('Błąd podczas przesyłania danych na serwer.');
+    error: function(xhr) {
+      console.log(xhr.responseText);
     }
-  })
-  .catch(error => {
-    console.error('Błąd podczas przesyłania danych na serwer:', error);
   });
 }
