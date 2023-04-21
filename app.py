@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-from os import environ
+import os 
 from models.myform import AnkietaForm
 import json
 
@@ -16,13 +16,17 @@ def create_app():
   from models.users import Users
   from models.task_results import TestResult
 
-  DB_USER = environ.get('DB_USER')
-  DB_PASSWORD = environ.get('DB_PASSWORD')
-  DB_HOST = environ.get('DB_HOST') 
-  DB_PORT = environ.get('DB_PORT')
-  DB_NAME = environ.get('DB_NAME')
+    # e.g. '127.0.0.1' ('172.17.0.1' if deployed to GAE Flex)
+  db_user = os.getenv("db_user")  # e.g. 'my-db-user'
+  db_pass = os.getenv("db_pass")  # e.g. 'my-db-password'
+  db_name = os.getenv("db_name")  # e.g. 'my-database'
+  db_port = "5432" # e.g. 'my-database' 
+  db_host = "34.116.183.30"
+  SQLALCHEMY_DATABASE_URI = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 
-  SQLALCHEMY_DATABASE_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+  
+    
+  #SQLALCHEMY_DATABASE_URI = 
 
   #coś zmienne srodowiskowe mi nie działają więc
   #to lokalnie:
@@ -266,6 +270,6 @@ def create_app():
   def page23():
     return render_template('end.html')
   if __name__ == "__main__":
-    app.run(host= '0.0.0.0', debug=True, port=int(environ.get("PORT",8080)))
+    app.run(host= '0.0.0.0', debug=True, port=int(os.getenv("PORT",8080)))
 
   return app
