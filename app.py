@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os 
 from models.myform import AnkietaForm
@@ -29,11 +29,11 @@ def create_app():
     #f"postgresql://postgres:{db_pass}@{db_host}:5432/{db_name}"
     db.init_app(app)
     
-    @app.before_request
-    def block_firefox():
-        user_agent = request.headers.get('User-Agent')
-        if 'Firefox' in user_agent:
-            return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
+    # @app.before_request
+    # def block_firefox():
+    #     user_agent = request.headers.get('User-Agent')
+    #     if 'Firefox' in user_agent:
+    #         return 'Dostęp z przeglądarki Firefox jest zabroniony.', 403
 
 
     @app.route("/")
@@ -72,7 +72,7 @@ def create_app():
     def page4():
         return render_template('spot-typo.html')
         
-    @app.route('/page5', methods=['GET', 'POST'])
+    @app.route('/page5', methods=['POST', 'GET'])
     def page5():
         try:
             if request.method == 'POST':
@@ -85,10 +85,17 @@ def create_app():
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
                 db.session.add(new_result)
                 db.session.commit()
+
+                response_data = {
+                'status': 'success', # Status odpowiedzi
+                'message': 'Dane zostały pomyślnie przetworzone', # Komunikat
+                'redirect': '/page6' # Adres URL docelowej strony do przekierowania
+                }
+
         except Exception as e:
             db.session.rollback()
             print(str(e))
-        return redirect('/page6')
+        return jsonify(response_data)
         
     @app.route('/page6')
     def page6():

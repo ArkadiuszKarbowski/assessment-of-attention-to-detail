@@ -51,32 +51,23 @@ function stopTimer() {
 
 
   sendData();
-//   $.ajax({
-//     url: "/page5",
-//     type: "POST",
-//     data: { timetak: timeSpent, sum: suma},
-
-    
-//     success: function(response) {
-//       console.log(response);
-//       window.location.href = "/page6";
-//     },
-//     error: function(xhr) {
-//       console.log(xhr.responseText);
-//     }
-//   });
 }
 
 function sendData(){
     const dict_values = {timeSpent, suma};
     const s = JSON.stringify(dict_values);
-    console.log(s);
-    window.alert(s)
 
-    $.ajax({
+$.ajax({
         url:"/page5",
         type:"POST",
         contentType: "application/json",
-        data: JSON.stringify(s)});
-
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+        });
+      
+       
 }

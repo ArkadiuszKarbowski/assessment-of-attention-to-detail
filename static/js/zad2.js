@@ -60,7 +60,7 @@
 
   function stopTimer() {
     const endTime = performance.now();
-    const timeSpent = (endTime - czas) / 1000;
+    timeSpent = (endTime - czas) / 1000;
     console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
     const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
@@ -78,3 +78,20 @@
       }
     });
   }
+
+  function sendData(){
+    const dict_values = {timeSpent, suma};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s)
+
+    $.ajax({
+        url:"/page5",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            window.location.href = "/page6";}
+        });
+
+}
