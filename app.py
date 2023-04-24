@@ -19,6 +19,7 @@ def create_app():
     db_name = os.environ["DB_NAME"]  # e.g. 'my-database'
     db_user = os.environ["DB_USER"]
 
+
     url = f"postgresql+pg8000://{db_user}:{db_pass}@/{db_name}?unix_sock=/cloudsql/{instance}/.s.PGSQL.5432"
 
     app.config["SQLALCHEMY_DATABASE_URI"] = url
@@ -75,8 +76,12 @@ def create_app():
     def page5():
         try:
             if request.method == 'POST':
-                selected_answer = request.form['sum']
-                time_taken = request.form['timetak']
+                output = request.get_json()
+                result = json.loads(output)
+                
+                selected_answer = result['suma']
+                time_taken = result['timeSpent']
+
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=1)
                 db.session.add(new_result)
                 db.session.commit()

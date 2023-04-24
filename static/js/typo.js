@@ -46,21 +46,37 @@ function startTimer() {
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-  $.ajax({
-    url: "/page5",
-    type: "POST",
-    data: { timetak: timeSpent, sum: suma},
+
+  sendData();
+//   $.ajax({
+//     url: "/page5",
+//     type: "POST",
+//     data: { timetak: timeSpent, sum: suma},
 
     
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page6";
-    },
-    error: function(xhr) {
-      console.log(xhr.responseText);
-    }
-  });
+//     success: function(response) {
+//       console.log(response);
+//       window.location.href = "/page6";
+//     },
+//     error: function(xhr) {
+//       console.log(xhr.responseText);
+//     }
+//   });
+}
+
+function sendData(){
+    const dict_values = {timeSpent, suma};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s)
+
+    $.ajax({
+        url:"/page5",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s)});
+
 }
