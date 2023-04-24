@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-  <form method="POST">
+  <form method="POST" action="/page3">
     {{ form.csrf_token }}
-    <div class="form-group">
+    <div class="form-group" >
         {{ form.study_program.label }}<span class="text-danger">*</span> {{ form.study_program(class="form-control") }}
         {% for error in form.study_program.errors %}
             <span class="text-danger">{{ error }}</span>
