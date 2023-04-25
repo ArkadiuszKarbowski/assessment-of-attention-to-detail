@@ -130,20 +130,28 @@ def create_app():
     def page8():
         return render_template('zad3.html')
 
-    @app.route('/page9', methods=['GET', 'POST'])
+    @app.route('/page9', methods=['POST', 'GET'])
     def page9():
         try:
             if request.method == 'POST':
-                selected_answer = request.form['sel']
-                correct_answer = request.form['correct']
-                time_taken = request.form['timetak']
+                output = request.get_json()
+                result = json.loads(output)
+                selected_answer = result['sel']
+                correct_answer = result['correct']
+                time_taken = result['timetak']
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
                 db.session.add(new_result)
                 db.session.commit()
+
+                response_data = {
+                'status': 'success', # Status odpowiedzi
+                'message': 'Dane zostały pomyślnie przetworzone', # Komunikat
+                'redirect': '/page10' # Adres URL docelowej strony do przekierowania
+                }
         except Exception as e:
             db.session.rollback()
             print(str(e))
-        return redirect('/page10')
+        return jsonify(response_data)
 
     @app.route('/page10')
     def page10():
