@@ -53,7 +53,8 @@
   let czas;
   let selectedAnswer;
   let timeSpent; // zmienna zdefiniowana na początku skryptu
-
+  ver = randomNumber;
+  correct = odp_pop;
   function startTimer() {
     czas = performance.now();
   }
@@ -65,33 +66,26 @@
 
     const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
-    $.ajax({
-      url: "/page7",
-      type: "POST",
-      data: { ver: randomNumber, correct: odp_pop, timetak: timeSpent, sel: selectedAnswer },
-      success: function(response) {
-        console.log(response);
-        window.location.href = "/page8";
-      },
-      error: function(xhr) {
-        console.log(xhr.responseText);
-      }
-    });
+    sendData();
   }
 
   function sendData(){
-    const dict_values = {timeSpent, suma};
+    const dict_values = {timeSpent, selectedAnswer, ver, correct};
     const s = JSON.stringify(dict_values);
     console.log(s);
     window.alert(s)
 
-    $.ajax({
-        url:"/page5",
+$.ajax({
+        url:"/page7",
         type:"POST",
         contentType: "application/json",
         data: JSON.stringify(s),
         success: function(response) {
-            window.location.href = "/page6";}
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
         });
-
+      
+       
 }
