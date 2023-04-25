@@ -136,7 +136,7 @@ def create_app():
             if request.method == 'POST':
                 output = request.get_json()
                 result = json.loads(output)
-                selected_answer = result['sel']
+                selected_answer = result['selectedAnswers']
                 correct_answer = result['correct']
                 time_taken = result['timetak']
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
