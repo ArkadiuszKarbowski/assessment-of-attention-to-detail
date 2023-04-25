@@ -45,20 +45,31 @@ function startTimer() {
 }
 
 function stopTimer() {
-  const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
-  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+    const endTime = performance.now();
+    timeSpent = (endTime - czas) / 1000;
+    console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-  $.ajax({
-    url: "/page22",
-    type: "POST",
-    data: { timetak: timeSpent, sum: suma},
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page23";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
+    selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+
+    sendData();
+  }
+
+  function sendData(){
+    const dict_values = {timeSpent, selectedAnswer, ver, correct};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s)
+
+$.ajax({
+        url:"/page22",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+
 }

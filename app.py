@@ -287,8 +287,12 @@ def create_app():
     def page22():
         try:
             if request.method == 'POST':
-                selected_answer = request.form['sum']
-                time_taken = request.form['timetak']
+
+                output = request.get_json()
+                result = json.loads(output)
+
+                selected_answer = result['suma']
+                time_taken = result['timeSpent']
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=9)
                 db.session.add(new_result)
                 db.session.commit()
