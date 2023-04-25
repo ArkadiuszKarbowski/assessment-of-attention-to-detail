@@ -71,7 +71,7 @@ rightColumn.appendChild(document.createElement('h2')).innerText = 'Wybierz hasł
 rightColumn.appendChild(checkboxy);
 
 let czas;
-let selectedAnswer;
+let selectedAnswers;
 let timeSpent; // zmienna zdefiniowana na początku skryptu
 
 function startTimer() {
@@ -95,7 +95,7 @@ function stopTimer() {
   }
   
   function sendData() {
-    const dict_values = {timeSpent, selectedAnswer, correct};
+    const dict_values = {timeSpent, selectedAnswers, correct};
     const s = JSON.stringify(dict_values);
     console.log(s);
     window.alert(s);
