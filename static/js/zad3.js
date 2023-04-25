@@ -79,27 +79,28 @@ function startTimer() {
 }
 
 function stopTimer() {
-  const endTime = performance.now();
-  timeSpent = (endTime - czas) / 1000;
-  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-
-  let selectedAnswers = '';
-  checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-  for (let i = 0; i < checkboxes.length; i++) {
-  selectedAnswers += checkboxes[i].value;
-  if (i < checkboxes.length - 1) {
-    selectedAnswers += '';
+    const endTime = performance.now();
+    timeSpent = (endTime - czas) / 1000;
+    console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+  
+    let selectedAnswers = '';
+    checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    for (let i = 0; i < checkboxes.length; i++) {
+      selectedAnswers += checkboxes[i].value;
+      if (i < checkboxes.length - 1) {
+        selectedAnswers += '';
+      }
+    }
+    sendData();
   }
-}
-  sendData();
-  }  
-  function sendData(){
+  
+  function sendData() {
     const dict_values = {timeSpent, selectedAnswer, correct};
     const s = JSON.stringify(dict_values);
     console.log(s);
-    window.alert(s)
-
-$.ajax({
+    window.alert(s);
+  
+    $.ajax({
         url:"/page9",
         type:"POST",
         contentType: "application/json",
@@ -109,7 +110,5 @@ $.ajax({
                 window.location.href = response.redirect;
             }
         }
-        });
-      
-       
-}
+    });
+  }
