@@ -11,18 +11,6 @@ function startTimer() {
   czas = performance.now();
 }
 
-// function playAnimalSounds() {
-//   if (!isPlaying) {
-//     isPlaying = true;
-//     audio.currentTime = 0;
-//     audio.play();
-//     setTimeout(function() {
-//       isPlaying = false;
-//       playAnimalSounds();
-//     }, audio.duration * 1000 + 2000); // opóźnienie równoważne długości dźwięku + 2 sekundy
-//   }
-// }
-
 function Show(){
   img.style.visibility = "visible";
   nr1.style.visibility = "visible";
@@ -57,17 +45,23 @@ function stopTimer() {
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   getSelectedAnswer();
-
-  $.ajax({
-    url: "/page16",
-    type: "POST",
-    data: {timetak: timeSpent, sel: selectedanswer }, 
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page17";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
+  sendData();
 }
+function sendData() {
+    const dict_values = {timeSpent, selectedanswer};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s);
+  
+    $.ajax({
+        url:"/page16",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+  }

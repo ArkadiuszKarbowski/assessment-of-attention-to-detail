@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block body %}
-<form id="form-container" method="post" action="/page16">
+<form id="form-container">
 	<div class="row text-center">
 		<p style="font-weight: bold; font-size: 24px;">Które dwa psy są takie same? </p><br>
       	<p>UWAGA!!! PROSIMY O WŁĄCZENIE DZWIĘKU!</p>
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	<button class="btn btn-primary mb-3" type="button" value="Play" id="odsluchajBtn">Odsłuchaj </button>
-	<div class="row mt-3"><button class="btn btn-primary mb-3" type="submit" onclick="stopTimer()" id="dalejBtn" disabled="true">Dalej </button></div>
+	<div class="row mt-3"><button class="btn btn-primary mb-3" type="button" onclick="stopTimer()" id="dalejBtn" disabled="true">Dalej </button></div>
 </form>
 
 <script src="static/js/zad6.js"></script>
