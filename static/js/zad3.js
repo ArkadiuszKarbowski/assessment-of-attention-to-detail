@@ -84,7 +84,7 @@ function stopTimer() {
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   let selectedAnswers = '';
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
   for (let i = 0; i < checkboxes.length; i++) {
   selectedAnswers += checkboxes[i].value;
   if (i < checkboxes.length - 1) {
