@@ -45,20 +45,17 @@ function startTimer() {
 }
 
 function stopTimer() {
-    const endTime = performance.now();
-    timeSpent = (endTime - czas) / 1000;
-    console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
+  const endTime = performance.now();
+  timeSpent = (endTime - czas) / 1000;
+  console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-    selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
-    sendData();
-  }
+  sendData();
+}
 
-  function sendData(){
-    const dict_values = {timeSpent, selectedAnswer, ver, correct};
+function sendData(){
+    const dict_values = {timeSpent, suma};
     const s = JSON.stringify(dict_values);
-   
-    
 
 $.ajax({
         url:"/page22",
@@ -70,6 +67,7 @@ $.ajax({
                 window.location.href = response.redirect;
             }
         }
-    });
-
+        });
+      
+       
 }
