@@ -64,7 +64,7 @@
     timeSpent = (endTime - czas) / 1000;
     console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
-    const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+    selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
     sendData();
   }
