@@ -24,31 +24,39 @@ document.getElementById("question-container").innerHTML = question;
 let czas;
 let timeSpent;
 // Zapisywanie wybranej odpowiedzi do zmiennej selected
-var selectedAnswer;
+let selectedAnswer;
+let correct;
+ver = x;
 function startTimer() {
   czas = performance.now();
 }
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
 
   let cor = x - 2;
-  let correct = answers[cor];
-
-  $.ajax({
-    url: "/page12",
-    type: "POST",
-    data: { ver: x, correct: correct, timetak: timeSpent, sel: selectedAnswer },
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page13";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
+  correct = answers[cor];
+  sendData();
 }
+function sendData() {
+    const dict_values = {timeSpent, selectedAnswer, correct, ver};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s);
+  
+    $.ajax({
+        url:"/page12",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+  }
