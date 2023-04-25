@@ -296,10 +296,15 @@ def create_app():
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=2, task_version=1, time_taken=time_taken, task_number=9)
                 db.session.add(new_result)
                 db.session.commit()
+                
+                response_data = {
+                'status': 'success', # Status odpowiedzi
+                'redirect': '/page23' # Adres URL docelowej strony do przekierowania
+                }
         except Exception as e:
             db.session.rollback()
             print(str(e))
-        return redirect('/page23')
+        return jsonify(response_data)
     @app.route('/page23')
     def page23():
         return render_template('end.html')
