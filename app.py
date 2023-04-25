@@ -138,7 +138,7 @@ def create_app():
                 result = json.loads(output)
                 selected_answer = result['selectedAnswers']
                 correct_answer = result['correct']
-                time_taken = result['timetak']
+                time_taken = result['timeSpent']
                 new_result = TestResult(user_id=session['user_id'], selected_answer=selected_answer, correct_answer=correct_answer, task_version=1, time_taken=time_taken, task_number=3)
                 db.session.add(new_result)
                 db.session.commit()
