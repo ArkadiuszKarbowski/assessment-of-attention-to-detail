@@ -1,7 +1,8 @@
 let czas;
 let timeSpent;
+let correct;
 // Zapisywanie wybranej odpowiedzi do zmiennej selected
-var selectedAnswer;
+let selectedAnswer;
 function startTimer() {
   czas = performance.now();
 }
@@ -26,22 +27,28 @@ document.getElementById("question-container").innerHTML = question;
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
 
   selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
-  let correct = answers[0];
-
-  $.ajax({
-    url: "/page20",
-    type: "POST",
-    data: {correct: correct, timetak: timeSpent, sel: selectedAnswer },
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page21";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
+  correct = answers[0];
+  sendData();
 }
+function sendData() {
+    const dict_values = {timeSpent, selectedAnswer, correct};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s);
+  
+    $.ajax({
+        url:"/page20",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+  }
