@@ -97,8 +97,7 @@ function stopTimer() {
   function sendData() {
     const dict_values = {timeSpent, selectedAnswers, correct};
     const s = JSON.stringify(dict_values);
-    console.log(s);
-    window.alert(s);
+    
   
     $.ajax({
         url:"/page9",

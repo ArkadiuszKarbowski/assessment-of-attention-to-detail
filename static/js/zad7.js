@@ -25,8 +25,8 @@ function stopTimer() {
 function sendData() {
     const dict_values = {timeSpent, selectedanswer};
     const s = JSON.stringify(dict_values);
-    console.log(s);
-    window.alert(s);
+   
+    
   
     $.ajax({
         url:"/page18",
