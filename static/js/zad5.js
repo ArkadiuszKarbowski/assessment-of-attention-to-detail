@@ -8,19 +8,26 @@ function startTimer() {
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  const selectedAnswer = document.getElementById("odp").value;
-  $.ajax({
-      url: "/page14",
-      type: "POST",
-      data: {timetak: timeSpent, sel: selectedAnswer },
-      success: function(response) {
-        console.log(response);
-        window.location.href = "/page15";
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr.responseText);
-      }
-  });
+  selectedAnswer = document.getElementById("odp").value;
+  sendData();
 }
+function sendData() {
+    const dict_values = {timeSpent, selectedAnswer};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s);
+  
+    $.ajax({
+        url:"/page14",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+  }
