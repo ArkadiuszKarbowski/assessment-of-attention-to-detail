@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block body %}
-<form id="form-container" method="post" action="/page18">
+<form id="form-container">
     <div class="row text-center"><p style="font-weight: bold; font-size: 24px;">Kliknij zwierzęta w kolejności w jakiej występowały ich odgłosy na poprzedniej stronie: </p></div>
 
     <div class="row"> 
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="row"><button class="btn btn-primary mb-3" type="submit" onclick="stopTimer()">Dalej</button></div>
+    <div class="row"><button class="btn btn-primary mb-3" type="button" onclick="stopTimer()">Dalej</button></div>
 </form>
 
 <script src="static/js/zad7.js"></script>

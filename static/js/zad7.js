@@ -1,5 +1,5 @@
-var selectedanswer = "";
-var clickedSquares = [];
+let selectedanswer = "";
+let clickedSquares = [];
 let czas;
 let timeSpent;
 
@@ -18,18 +18,25 @@ function handleClick(square) {
 
 function stopTimer() {
   const endTime = performance.now();
-  const timeSpent = (endTime - czas) / 1000;
+  timeSpent = (endTime - czas) / 1000;
   console.log(`Czas wykonywania zadania: ${timeSpent} sekund`);
-  $.ajax({
-    url: "/page18",
-    type: "POST",
-    data: { timetak: timeSpent, sel: selectedanswer },
-    success: function(response) {
-      console.log(response);
-      window.location.href = "/page19";
-    },
-    error: function(xhr, status, error) {
-      console.log(xhr.responseText);
-    }
-  });
+  sendData();
 }
+function sendData() {
+    const dict_values = {timeSpent, selectedanswer};
+    const s = JSON.stringify(dict_values);
+    console.log(s);
+    window.alert(s);
+  
+    $.ajax({
+        url:"/page18",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(s),
+        success: function(response) {
+            if (response.status === 'success') { 
+                window.location.href = response.redirect;
+            }
+        }
+    });
+  }
